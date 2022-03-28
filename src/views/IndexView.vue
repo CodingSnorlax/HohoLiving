@@ -3,7 +3,7 @@
   <div class="banner d-none d-md-block">
     <div class="container">
       <div class="title pt-28 mb-4">
-        <h4 class="text-white fw-light mb-4">極簡生活哲學</h4>
+        <h4 class="text-white fw-light mb-4">極簡美學</h4>
         <h1 class="text-white">好好生活</h1>
         <h2 class="text-white">存在家中每個角落</h2>
       </div>
@@ -14,40 +14,67 @@
   <div class="mobile-banner d-block d-md-none">
     <div class="container">
       <div class="title pt-28 mb-4">
-        <h4 class="text-secondary fw-light mb-4">極簡生活哲學</h4>
+        <h4 class="text-secondary fw-light mb-4">極簡美學</h4>
         <h1 class="text-secondary">好好生活</h1>
         <h2 class="text-secondary">存在家中每個角落</h2>
       </div>
       <button class="btn btn-secondary text-white">點我逛逛</button>
     </div>
   </div>
-  <!-- 好好哲學 -->
-  <div class="brand-intro">
+  <!-- 好好精選 -->
+  <div class="product">
     <div class="container">
-      <h2 class="text-center my-12">好好哲學</h2>
-      <div class="content">
-        <div class="row flex-column flex-md-row">
-          <div
-            class="col-md-4 offset-md-2 d-flex flex-column justify-content-center"
-          >
-            <div
-              class="brand-intro-text text-secondary mx-12 mx-md-0 mb-8 mb-md-4 fs-4 border-bottom"
-            >
-              <p>Less is more.</p>
-              <p>好好生活致力於</p>
-              <p>提供現代平凡男子女子的極簡生活提案。</p>
-            </div>
+      <h2 class="text-center my-12">好好精選</h2>
+      <div class="product-card-section d-flex">
+        <div class="card mb-3 me-4">
+          <img
+            src="https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+            class="card-img-top"
+            alt="時鐘"
+          />
+          <div class="card-body">
+            <h4 class="card-title text-secondary fs-5 fs-md-4 text-center">
+              KLOCKIS 時鐘
+            </h4>
           </div>
-          <div class="col-md-6">
-            <div
-              class="brand-intro-img rounded-3 d-flex justify-content-center"
-            >
-              <img
-                class="w-50 rounded-3"
-                src="../assets/images/plant.jpg"
-                alt=""
-              />
-            </div>
+        </div>
+
+        <div class="card mb-3 me-4">
+          <img
+            src="https://images.unsplash.com/photo-1605714117967-9fe201ddfe9d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"
+            class="card-img-top"
+            alt="馬克杯"
+          />
+          <div class="card-body">
+            <h4 class="card-title text-secondary fs-5 fs-md-4 text-center">
+              DINERA 馬克杯
+            </h4>
+          </div>
+        </div>
+
+        <div class="card mb-3 me-4">
+          <img
+            src="https://images.unsplash.com/photo-1605714117967-9fe201ddfe9d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"
+            class="card-img-top"
+            alt="馬克杯"
+          />
+          <div class="card-body">
+            <h4 class="card-title text-secondary fs-5 fs-md-4 text-center">
+              DINERA 馬克杯
+            </h4>
+          </div>
+        </div>
+
+        <div class="card mb-3">
+          <img
+            src="https://images.unsplash.com/photo-1526198049595-f32cde2a219d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1123&q=80"
+            class="card-img-top"
+            alt="花瓶"
+          />
+          <div class="card-body">
+            <h4 class="card-title text-secondary fs-5 fs-md-4 text-center">
+              VASEN 花瓶
+            </h4>
           </div>
         </div>
       </div>
@@ -106,60 +133,33 @@
       </div>
     </div>
   </div>
-  <!-- 好好精選 -->
-  <div class="product">
+  <!-- 好好哲學 -->
+  <div class="brand-intro">
     <div class="container">
-      <h2 class="text-center my-12">好好精選</h2>
-      <div class="product-card-section d-flex">
-        <div class="card mb-3 me-4">
-          <img
-            src="https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-            class="card-img-top"
-            alt="時鐘"
-          />
-          <div class="card-body">
-            <h4 class="card-title text-secondary fs-5 fs-md-4 text-center">
-              KLOCKIS 時鐘
-            </h4>
+      <h2 class="text-center my-12">好好哲學</h2>
+      <div class="content">
+        <div class="row flex-column flex-md-row">
+          <div
+            class="col-md-4 offset-md-2 d-flex flex-column justify-content-center"
+          >
+            <div
+              class="brand-intro-text text-secondary mx-12 mx-md-0 mb-8 mb-md-4 fs-4 border-bottom"
+            >
+              <p>Less is more.</p>
+              <p>好好生活致力於</p>
+              <p>提供現代平凡男子女子的極簡生活提案。</p>
+            </div>
           </div>
-        </div>
-
-        <div class="card mb-3 me-4">
-          <img
-            src="https://images.unsplash.com/photo-1605714117967-9fe201ddfe9d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"
-            class="card-img-top"
-            alt="馬克杯"
-          />
-          <div class="card-body">
-            <h4 class="card-title text-secondary fs-5 fs-md-4 text-center">
-              DINERA 馬克杯
-            </h4>
-          </div>
-        </div>
-
-        <div class="card mb-3 me-4">
-          <img
-            src="https://images.unsplash.com/photo-1605714117967-9fe201ddfe9d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"
-            class="card-img-top"
-            alt="馬克杯"
-          />
-          <div class="card-body">
-            <h4 class="card-title text-secondary fs-5 fs-md-4 text-center">
-              DINERA 馬克杯
-            </h4>
-          </div>
-        </div>
-
-        <div class="card mb-3">
-          <img
-            src="https://images.unsplash.com/photo-1526198049595-f32cde2a219d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1123&q=80"
-            class="card-img-top"
-            alt="花瓶"
-          />
-          <div class="card-body">
-            <h4 class="card-title text-secondary fs-5 fs-md-4 text-center">
-              VASEN 花瓶
-            </h4>
+          <div class="col-md-6">
+            <div
+              class="brand-intro-img rounded-3 d-flex justify-content-center"
+            >
+              <img
+                class="w-50 rounded-3"
+                src="../assets/images/plant.jpg"
+                alt=""
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -322,7 +322,7 @@
   background-position: bottom;
 }
 .mobile-banner {
-  height: calc(100vh - 68px);
+  height: calc(100vh - 220px);
   background-image: url(https://images.unsplash.com/photo-1596079890744-c1a0462d0975?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format);
   background-size: cover;
   background-repeat: no-repeat;

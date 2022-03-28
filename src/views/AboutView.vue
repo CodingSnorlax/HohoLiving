@@ -1,1 +1,1 @@
-<template>About Page</template>
+<template>關於</template>

@@ -1,53 +1,102 @@
 <template>
-  <div class="bg-white sticky-top">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light px-8 d-flex">
-      <!-- logo -->
-      <router-link class="nav-link fs-3 text-dark" to="/">好好生活</router-link>
-      <!-- 漢堡選單內容 -->
-      <div
-        class="collapse navbar-collapse bg-light custom-header-md-open justify-content-end"
-        id="navbarNav"
-      >
-        <ul class="navbar-nav me-8">
-          <li class="nav-item active">
-            <router-link class="nav-link pe-2" to="/products"
-              >好好精選</router-link
-            >
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link pe-2" to="/customerService"
-              >常見問題</router-link
-            >
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link pe-2" to="/about"
-              >關於我們</router-link
-            >
-          </li>
-        </ul>
+  <!-- 平板以上 nav -->
+  <div class="bg-light sticky-top d-none d-md-block">
+    <div class="container bg-light">
+      <nav class="navbar navbar-expand-lg navbar-light justify-content-between">
+        <!-- logo -->
+        <router-link class="nav-link fs-3 text-dark p-0" to="/"
+          >好好生活</router-link
+        >
+        <!-- 包括 link & icon -->
+        <div class="tablet-nav d-flex align-item-center">
+          <!-- nav links -->
+          <ul class="d-flex list-unstyled me-8">
+            <li class="pt-3 active">
+              <router-link class="nav-link pe-2" to="/products"
+                >好好精選</router-link
+              >
+            </li>
+            <li class="pt-3">
+              <router-link class="nav-link pe-2" to="/customerService"
+                >常見問題</router-link
+              >
+            </li>
+            <li class="pt-3">
+              <router-link class="nav-link pe-2" to="/about"
+                >關於我們</router-link
+              >
+            </li>
+          </ul>
 
+          <!-- icon 區域 -->
+          <div class="d-flex align-items-center justify-content-center me-4">
+            <a href="#">
+              <i class="bi bi-search me-8"></i>
+            </a>
+            <a href="#"><i class="bi bi-heart-fill fs-4 text-dark me-8"></i></a>
+            <a href="#"><i class="bi bi-cart-fill fs-3 text-dark"></i></a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <!-- 手機版 nav -->
+  <div class="bg-light sticky-top d-md-none">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light px-8">
+        <!-- 漢堡選單按鈕 -->
+        <button
+          class="navbar-toggler my-2"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- logo -->
+        <router-link class="nav-link fs-3 text-dark" to="/"
+          >好好生活</router-link
+        >
         <!-- icon 區域 -->
-        <div class="d-flex align-items-center icon-section">
+        <div class="d-flex align-items-center justify-content-center me-4 pb-2">
+          <a href="#">
+            <i class="bi bi-search me-8"></i>
+          </a>
           <a href="#"><i class="bi bi-heart-fill fs-4 text-dark me-8"></i></a>
-          <a href="./cart-2.html"
-            ><i class="bi bi-cart-fill fs-3 text-dark"></i
-          ></a>
+          <a href="#"><i class="bi bi-cart-fill fs-3 text-dark"></i></a>
+        </div>
+      </nav>
+      <div class="phone-display-section text-center">
+        <!-- 漢堡選單內容 -->
+        <div
+          class="collapse navbar-collapse bg-light custom-header-md-open justify-content-end"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav me-8 pb-4">
+            <li class="nav-item active">
+              <router-link class="nav-link pe-2" to="/products"
+                >好好精選</router-link
+              >
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link pe-2" to="/customerService"
+                >常見問題</router-link
+              >
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link pe-2" to="/about"
+                >關於我們</router-link
+              >
+            </li>
+          </ul>
         </div>
       </div>
-
-      <!-- 漢堡選單按鈕 -->
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    </nav>
+    </div>
   </div>
 </template>
 
