@@ -11,19 +11,19 @@
           <ul class="list-unstyled">
             <li
               class="d-block fs-5 pe-4 ps-2 mb-3 py-1 text-decoration-none product-category-list-item"
-              :class="{ 'active': tempCategory === '全部商品' }"
-              @click="getProductData(), (tempCategory = '全部商品')"
+              :class="{ active: tempCategory === '全部商品' }"
+              @click="tempCategory = '全部商品'"
             >
               <router-link
                 :to="{ name: 'products', query: { category: '全部商品' } }"
-                >全部產品</router-link
+                >全部商品</router-link
               >
             </li>
             <template v-for="item in category" :key="item">
               <li
                 class="d-block fs-5 pe-4 ps-2 mb-3 py-1 text-decoration-none product-category-list-item"
-                :class="{ 'active': tempCategory === item }"
-                @click="getProductData(page, item), (tempCategory = item)"
+                :class="{ active: tempCategory === item }"
+                @click="tempCategory = item"
               >
                 <router-link
                   :to="{ name: 'products', query: { category: tempCategory } }"
@@ -97,10 +97,11 @@ export default {
     return {
       products: [],
       category: [],
+      page: 0,
       // 自己寫的 BS component
       pagination: {},
       // 當下篩選類別，控制狀態樣式
-      tempCategory: 'all'
+      tempCategory: '全部商品'
     }
   },
   components: {
@@ -109,7 +110,7 @@ export default {
   // 嘗試 router-link 寫法
   watch: {
     tempCategory () {
-      this.getProductData()
+      this.getProductData(this.page = 1, this.tempCategory)
     }
   },
   methods: {
