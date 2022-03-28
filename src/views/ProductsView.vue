@@ -11,21 +11,23 @@
           <ul class="list-unstyled">
             <li
               class="d-block fs-5 pe-4 ps-2 mb-3 py-1 text-decoration-none product-category-list-item"
-              @click="getProductData(), (tempCategory = 'all')"
+              :class="{ 'active': tempCategory === '全部商品' }"
+              @click="getProductData(), (tempCategory = '全部商品')"
             >
               <router-link
-                :class="{ active: itemCategory === 'all' }"
+                :to="{ name: 'products', query: { category: '全部商品' } }"
                 >全部產品</router-link
               >
             </li>
             <template v-for="item in category" :key="item">
               <li
                 class="d-block fs-5 pe-4 ps-2 mb-3 py-1 text-decoration-none product-category-list-item"
+                :class="{ 'active': tempCategory === item }"
                 @click="getProductData(page, item), (tempCategory = item)"
               >
                 <router-link
+                  :to="{ name: 'products', query: { category: tempCategory } }"
                   class="text-decoration-none"
-                  :class="{ active: tempCategory === item }"
                   >{{ item }}</router-link
                 >
               </li>
@@ -161,13 +163,14 @@ export default {
       cursor: pointer;
       text-decoration: none;
     }
-    a.active {
-      border-left: 3px solid gray;
-    }
     border-left: 3px solid transparent;
     &:hover {
-      border-left: 3px solid gray;
+      // border-left: 3px solid gray;
     }
   }
+}
+.active {
+  padding-left: 10px;
+  border-left: 3px solid gray;
 }
 </style>
