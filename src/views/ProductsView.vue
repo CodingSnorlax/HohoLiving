@@ -72,9 +72,7 @@
               </div>
             </div>
             <!-- 加入購物車 btn -->
-            <a
-              class="text-secondary border-start px-6 add-to-cart-btn"
-            >
+            <a class="text-secondary border-start px-6 add-to-cart-btn">
               <i class="bi bi-cart-plus fs-2"></i>
             </a>
           </div>
@@ -118,12 +116,14 @@ export default {
       let url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/products?page=${page}`
       if (query) {
         url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/products?category=${query}`
+        this.tempCategory = query
+      } else {
+        this.tempCategory = ''
       }
       this.$http.get(url).then((res) => {
         this.products = res.data.products
         this.pagination = res.data.pagination
       })
-      this.tempCategory = query
     },
     getCategoryData () {
       this.$http
@@ -165,7 +165,7 @@ export default {
   top: 0;
   left: 0;
 }
-.add-to-cart-btn{
+.add-to-cart-btn {
   cursor: pointer;
 }
 .add-to-cart-btn i:hover {
