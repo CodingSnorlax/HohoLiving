@@ -74,7 +74,6 @@
             <!-- 加入購物車 btn -->
             <a
               class="text-secondary border-start px-6 add-to-cart-btn"
-              @click="test"
             >
               <i class="bi bi-cart-plus fs-2"></i>
             </a>
@@ -115,9 +114,6 @@ export default {
     }
   },
   methods: {
-    test () {
-      alert('hi, 我是包偉銘')
-    },
     getProductData (page = 1, query) {
       let url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/products?page=${page}`
       if (query) {

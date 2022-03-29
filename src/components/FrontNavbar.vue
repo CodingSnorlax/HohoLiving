@@ -34,7 +34,15 @@
               <i class="bi bi-search me-8"></i>
             </a>
             <a href="#"><i class="bi bi-heart-fill fs-4 text-dark me-8"></i></a>
-            <a href="#"><i class="bi bi-cart-fill fs-3 text-dark"></i></a>
+            <a href="#" class="position-relative"
+              ><i class="bi bi-cart-fill fs-3 text-dark"></i>
+              <span
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              >
+                {{ cartData.carts?.length }}
+                <span class="visually-hidden">unread messages</span>
+              </span></a
+            >
           </div>
         </div>
       </nav>
@@ -68,7 +76,16 @@
             <i class="bi bi-search me-8"></i>
           </a>
           <a href="#"><i class="bi bi-heart-fill fs-4 text-dark me-8"></i></a>
-          <a href="#"><i class="bi bi-cart-fill fs-3 text-dark"></i></a>
+          <a href="#" class="position-relative"
+              ><i class="bi bi-cart-fill fs-3 text-dark"></i>
+              <!-- 待解決：loading 畫面進來的時候，數字沒有但有紅點 -->
+              <span
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                :class="{'visually-hidden': cartData.carts?.length === 0}"
+              >
+                {{ cartData.carts?.length }}
+              </span></a
+            >
         </div>
       </nav>
       <div class="phone-display-section text-center">
@@ -99,6 +116,41 @@
     </div>
   </div>
 </template>
+
+<script>
+import emitter from '@/libs/emitter'
+
+export default {
+  data () {
+    return {
+      cartData: []
+    }
+  },
+  methods: {
+    getCartData () {
+      this.$http
+        .get(
+          `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/cart`
+        )
+        .then((res) => {
+          // cartData 是個陣列
+          this.cartData = res.data.data
+        })
+        .catch((err) => {
+          console.dir(err)
+        })
+    }
+  },
+  mounted () {
+    this.getCartData()
+
+    // 綁定購物車與 navbar 上的品項新增數量
+    emitter.on('get-cart-data', () => {
+      this.getCartData()
+    })
+  }
+}
+</script>
 
 <style lang="scss">
 .logo {
