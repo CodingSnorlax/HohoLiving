@@ -6,7 +6,7 @@
         <ul
           class="w-100 pt-10 pe-10 me-20 list-unstyled sticky-top product-category-list text-secondary"
         >
-          <h3 class="fs-3 pe-4 mb-4 product-category-list-item">產品類別</h3>
+          <h3 class="fs-3 ps-2 pe-4 mb-4">產品類別</h3>
           <li
             class="d-block fs-5 pe-4 ps-2 mb-3 py-1 text-decoration-none product-category-list-item"
             :class="{ isSelected: tempCategory === '' }"
@@ -27,31 +27,35 @@
       </div>
     </div>
     <!-- 主要商品列表區 (卡片) -->
-    <div class="row">
-      <h2 class="text-center text-secondary pt-12 pb-16">好好精選</h2>
+    <div class="row g-10">
+      <h2 class="text-center text-secondary py-8">好好精選</h2>
       <!-- 卡片 -->
-      <div class="col-md-6" v-for="product in products" :key="product.id">
-        <div class="card border-0 mb-8">
-          <div class="img-cover">
+      <div
+        class="col-md-6 col-lg-4"
+        v-for="product in products"
+        :key="product.id"
+      >
+        <div class="card border-0 rounded-3 mb-24">
+          <div class="img-cover rounded-3">
             <img
               :src="product.imageUrl"
-              class="card-img-top rounded-0 h-100"
+              class="card-img-top rounded-0 h-100 text-overlay-img rounded-3"
               :alt="product.title"
             />
+            <span class="badge bg-secondary ms-3 mt-3 text-top fs-5">{{
+              product.category
+            }}</span>
           </div>
-          <div class="card-body p-0">
+          <div class="card-body p-0 d-flex justify-content-between pt-4">
             <div class="text">
               <h3
-                class="mb-1 mt-4 fs-5 d-flex justify-content-between align-item-center px-3"
+                class="mb-2 mt-1 fs-5 fw-bold d-flex justify-content-between align-item-center px-3"
               >
                 <router-link
                   :to="`/product/${product.id}`"
-                  class="text-secondary text-decoration-none stretched-link"
+                  class="text-secondary text-decoration-none"
                   >{{ product.title }}</router-link
                 >
-                <a href="#" class="text-secondary">
-                  <i class="bi bi-bookmark-plus-fill fs-4"></i>
-                </a>
               </h3>
               <div v-if="product.origin_price === product.price">
                 <p class="card-text mb-0 px-3 fs-6">
@@ -67,6 +71,13 @@
                 </p>
               </div>
             </div>
+            <!-- 加入購物車 btn -->
+            <a
+              class="text-secondary border-start px-6 add-to-cart-btn"
+              @click="test"
+            >
+              <i class="bi bi-cart-plus fs-2"></i>
+            </a>
           </div>
         </div>
       </div>
@@ -91,7 +102,7 @@ export default {
       // 自己寫的 BS component
       pagination: {},
       // 當下篩選類別，控制狀態樣式
-      tempCategory: '全部商品'
+      tempCategory: ''
     }
   },
   components: {
@@ -104,6 +115,9 @@ export default {
     }
   },
   methods: {
+    test () {
+      alert('hi, 我是包偉銘')
+    },
     getProductData (page = 1, query) {
       let url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/products?page=${page}`
       if (query) {
@@ -141,12 +155,27 @@ export default {
 </script>
 
 <style>
+/* 卡片圖片樣式設定 */
 .img-cover {
   height: 280px;
-  img {
-    object-fit: cover;
-  }
+  position: relative;
+  width: 100%;
 }
+.img-cover img {
+  object-fit: cover;
+}
+.text-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.add-to-cart-btn{
+  cursor: pointer;
+}
+.add-to-cart-btn i:hover {
+  color: #b5adad;
+}
+/* 產品列表選單 */
 .product-category-list {
   top: 84px;
 }
