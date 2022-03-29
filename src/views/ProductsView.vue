@@ -4,35 +4,25 @@
     <div class="row">
       <div class="col-12">
         <ul
-          id="categoryList"
           class="w-100 pt-10 pe-10 me-20 list-unstyled sticky-top product-category-list text-secondary"
         >
           <h3 class="fs-3 pe-4 mb-4 product-category-list-item">產品類別</h3>
-          <ul class="list-unstyled">
+          <li
+            class="d-block fs-5 pe-4 ps-2 mb-3 py-1 text-decoration-none product-category-list-item"
+            :class="{ isSelected: tempCategory === '' }"
+            @click="getProductData(page, '')"
+          >
+            全部商品
+          </li>
+          <template v-for="item in category" :key="item">
             <li
               class="d-block fs-5 pe-4 ps-2 mb-3 py-1 text-decoration-none product-category-list-item"
-              :class="{ active: tempCategory === '全部商品' }"
-              @click="tempCategory = '全部商品'"
+              :class="{ isSelected: tempCategory === item }"
+              @click="getProductData(page, item)"
             >
-              <router-link
-                :to="{ name: 'products', query: { category: '全部商品' } }"
-                >全部商品</router-link
-              >
+              {{ item }}
             </li>
-            <template v-for="item in category" :key="item">
-              <li
-                class="d-block fs-5 pe-4 ps-2 mb-3 py-1 text-decoration-none product-category-list-item"
-                :class="{ active: tempCategory === item }"
-                @click="tempCategory = item"
-              >
-                <router-link
-                  :to="{ name: 'products', query: { category: tempCategory } }"
-                  class="text-decoration-none"
-                  >{{ item }}</router-link
-                >
-              </li>
-            </template>
-          </ul>
+          </template>
         </ul>
       </div>
     </div>
@@ -110,7 +100,7 @@ export default {
   // 嘗試 router-link 寫法
   watch: {
     tempCategory () {
-      this.getProductData(this.page = 1, this.tempCategory)
+      this.getProductData((this.page = 1), this.tempCategory)
     }
   },
   methods: {
@@ -123,6 +113,7 @@ export default {
         this.products = res.data.products
         this.pagination = res.data.pagination
       })
+      this.tempCategory = query
     },
     getCategoryData () {
       this.$http
@@ -134,7 +125,6 @@ export default {
           res.data.products.forEach((product) => {
             tempCategory.push(product.category)
           })
-          // console.log(tempCategory)
           this.category = [...new Set(tempCategory)]
         })
         .catch((err) => {
@@ -150,7 +140,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style>
 .img-cover {
   height: 280px;
   img {
@@ -159,18 +149,13 @@ export default {
 }
 .product-category-list {
   top: 84px;
-  .product-category-list-item {
-    a {
-      cursor: pointer;
-      text-decoration: none;
-    }
-    border-left: 3px solid transparent;
-    &:hover {
-      // border-left: 3px solid gray;
-    }
-  }
 }
-.active {
+.product-category-list-item {
+  cursor: pointer;
+  padding-left: 10px;
+  border-left: 3px solid transparent;
+}
+.isSelected {
   padding-left: 10px;
   border-left: 3px solid gray;
 }
