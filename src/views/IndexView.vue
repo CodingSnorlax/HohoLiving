@@ -24,57 +24,27 @@
   <!-- 好好精選 -->
   <div class="product">
     <div class="container">
-      <h2 class="text-center my-12">好好精選</h2>
+      <h2 class="text-center my-12">限定促銷</h2>
       <div class="product-card-section d-flex">
-        <div class="card mb-3 me-4">
-          <img
-            src="https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-            class="card-img-top"
-            alt="時鐘"
-          />
-          <div class="card-body">
-            <h4 class="card-title text-secondary fs-5 fs-md-4 text-center">
-              KLOCKIS 時鐘
-            </h4>
-          </div>
-        </div>
+        <div class="row g-4">
+          <div class="col-md-3" v-for="item in products" :key="item.id">
+            <div class="card mb-3 h-100">
+              <div class="imageWrapper">
+                <img
+                  :src="item.imageUrl"
+                  class="card-img-top h-100"
+                  :alt="item.title"
+                />
+              </div>
 
-        <div class="card mb-3 me-4">
-          <img
-            src="https://images.unsplash.com/photo-1605714117967-9fe201ddfe9d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"
-            class="card-img-top"
-            alt="馬克杯"
-          />
-          <div class="card-body">
-            <h4 class="card-title text-secondary fs-5 fs-md-4 text-center">
-              DINERA 馬克杯
-            </h4>
-          </div>
-        </div>
-
-        <div class="card mb-3 me-4">
-          <img
-            src="https://images.unsplash.com/photo-1605714117967-9fe201ddfe9d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"
-            class="card-img-top"
-            alt="馬克杯"
-          />
-          <div class="card-body">
-            <h4 class="card-title text-secondary fs-5 fs-md-4 text-center">
-              DINERA 馬克杯
-            </h4>
-          </div>
-        </div>
-
-        <div class="card mb-3">
-          <img
-            src="https://images.unsplash.com/photo-1526198049595-f32cde2a219d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1123&q=80"
-            class="card-img-top"
-            alt="花瓶"
-          />
-          <div class="card-body">
-            <h4 class="card-title text-secondary fs-5 fs-md-4 text-center">
-              VASEN 花瓶
-            </h4>
+              <div class="card-body">
+                <h4 class="card-title text-secondary fs-5 fs-md-4 text-center">
+                  {{ item.title }}
+                </h4>
+                <router-link class="stretched-link" :to="`/product/${item.id}`"></router-link>
+              </div>
+            </div>
+            <!-- 卡片尾 -->
           </div>
         </div>
       </div>
@@ -99,6 +69,7 @@
               手工打造品味生活
             </h2>
           </div>
+          <router-link class="stretched-link" to="/about"></router-link>
         </div>
 
         <div class="card text-white border-0 mb-8 mb-md-0 me-md-4">
@@ -114,6 +85,7 @@
               注重每項產品細節
             </h2>
           </div>
+          <router-link class="stretched-link" to="/about"></router-link>
         </div>
 
         <div class="card text-white border-0 mb-8 mb-md-0 me-md-4">
@@ -129,6 +101,7 @@
               堅持選用環保木料
             </h2>
           </div>
+          <router-link class="stretched-link" to="/about"></router-link>
         </div>
       </div>
     </div>
@@ -173,14 +146,14 @@
       <!-- 卡片區域 -->
       <div class="customer-credit-card-section d-md-flex">
         <!-- 第一張卡片 -->
-        <div class="card mb-3 bg-transparent border-0">
+        <div class="card mb-3  border-0 bg-transparent">
           <div class="row g-0">
             <div class="col-3 col-md-12">
               <div
                 class="d-flex flex-column align-item-center flex-md-row justify-content-md-center"
               >
                 <img
-                  class="customer-photo rounded-circle border-1 d-block"
+                  class="customer-photo rounded-circle border-1 d-block mb-6"
                   src="https://images.unsplash.com/photo-1532318065232-2ba7c6676cd5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=923&q=80"
                   alt="customer"
                 />
@@ -188,20 +161,20 @@
             </div>
             <div class="col-9 col-md-12">
               <div class="card-body">
-                <h4 class="mb-4">購入 ARKELSTORP 實木桌</h4>
-                <h5 class="card-title text-secondary">
+                <h4 class="mb-4 text-center">購入 ARKELSTORP 實木桌</h4>
+                <h5 class="card-title text-center customer-credit-star">
                   商品滿意度 <i class="bi bi-star-fill"></i
                   ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
                   ><i class="bi bi-star-fill"></i>
                 </h5>
-                <p class="card-text text-light">
-                  質感不錯的一個桌子，外觀看起來很好看~
+                <p class="card-text text-light text-center">
+                  質感不錯的一個桌子，外觀看起來很好看~<br>
                   小缺點是抽屜沒有導軌，拖拉沒有那麼順
                 </p>
-                <p class="card-text d-flex flex-column">
-                  <small class="text-muted">時間 10 天前</small>
-                  <small class="text-muted">評論者 曾先生</small>
-                  <small class="text-muted">來自 台北</small>
+                <p class="card-text d-flex text-center flex-column customer-credit-time">
+                  <small class="">時間 10 天前</small>
+                  <small class="">評論者 曾先生</small>
+                  <small class="">來自 台北</small>
                 </p>
               </div>
             </div>
@@ -215,28 +188,27 @@
                 class="d-flex flex-column align-item-center flex-md-row justify-content-md-center"
               >
                 <img
-                  class="customer-photo rounded-circle border-1 d-block"
-                  src="https://images.unsplash.com/photo-1532318065232-2ba7c6676cd5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=923&q=80"
+                  class="customer-photo rounded-circle border-1 d-block mb-6"
+                  src="https://images.unsplash.com/photo-1479936343636-73cdc5aae0c3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
                   alt="customer"
                 />
               </div>
             </div>
             <div class="col-9 col-md-12">
               <div class="card-body">
-                <h4 class="mb-4">購入 ARKELSTORP 實木桌</h4>
-                <h5 class="card-title text-secondary">
+                <h4 class="mb-4 text-center">購入 DINERA 馬克杯</h4>
+                <h5 class="card-title text-center customer-credit-star">
                   商品滿意度 <i class="bi bi-star-fill"></i
                   ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
-                  ><i class="bi bi-star-fill"></i>
+                  ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                 </h5>
-                <p class="card-text text-light">
-                  質感不錯的一個桌子，外觀看起來很好看~
-                  小缺點是抽屜沒有導軌，拖拉沒有那麼順
+                <p class="card-text text-light text-center">
+                  天呀！不敢相信! <br>這真的就是我從英國回來之後一直在找的馬克杯！<br>謝謝好好生活大老遠從歐洲進口這個杯子，<br>我真的超超超超喜歡的啦～～～！謝謝你們！
                 </p>
-                <p class="card-text d-flex flex-column">
-                  <small class="text-muted">時間 10 天前</small>
-                  <small class="text-muted">評論者 曾先生</small>
-                  <small class="text-muted">來自 台北</small>
+                <p class="card-text d-flex text-center flex-column customer-credit-time">
+                  <small class="">時間 6 天前</small>
+                  <small class="">評論者 Yvonne</small>
+                  <small class="">來自 台中</small>
                 </p>
               </div>
             </div>
@@ -250,28 +222,27 @@
                 class="d-flex flex-column align-item-center flex-md-row justify-content-md-center"
               >
                 <img
-                  class="customer-photo rounded-circle border-1 d-block"
-                  src="https://images.unsplash.com/photo-1532318065232-2ba7c6676cd5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=923&q=80"
+                  class="customer-photo rounded-circle border-1 d-block mb-6"
+                  src="https://images.unsplash.com/photo-1584712464768-d91a86e4816f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=935&q=80"
                   alt="customer"
                 />
               </div>
             </div>
             <div class="col-9 col-md-12">
               <div class="card-body">
-                <h4 class="mb-4">購入 ARKELSTORP 實木桌</h4>
-                <h5 class="card-title text-secondary">
+                <h4 class="mb-4 text-center">購入 OPLEV 門墊</h4>
+                <h5 class="card-title text-center customer-credit-star">
                   商品滿意度 <i class="bi bi-star-fill"></i
                   ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
                   ><i class="bi bi-star-fill"></i>
                 </h5>
-                <p class="card-text text-light">
-                  質感不錯的一個桌子，外觀看起來很好看~
-                  小缺點是抽屜沒有導軌，拖拉沒有那麼順
+                <p class="card-text text-light text-center">
+                  這門墊止滑效果蠻好，<br>我跟我老婆都不擔心洗完澡地板濕滑的問題了勒，<br>這邊也推薦給大家喔
                 </p>
-                <p class="card-text d-flex flex-column">
-                  <small class="text-muted">時間 10 天前</small>
-                  <small class="text-muted">評論者 曾先生</small>
-                  <small class="text-muted">來自 台北</small>
+                <p class="card-text d-flex text-center flex-column customer-credit-time">
+                  <small class="">時間 2 天前</small>
+                  <small class="">評論者 吳先生</small>
+                  <small class="">來自 新北</small>
                 </p>
               </div>
             </div>
@@ -288,7 +259,7 @@
         <div class="row">
           <div class="col-10">
             <h3 class="text-light fs-3 fs-md-2 ms-4 pt-4 ps-3">
-              訂閱電子報，<br>掌握最新消息與會員專屬優惠！
+              訂閱電子報，<br />掌握最新消息與會員專屬優惠！
             </h3>
             <div class="input-group mb-3 ms-5">
               <input
@@ -313,9 +284,31 @@
   </div>
 </template>
 
+<script>
+export default {
+  data () {
+    return {
+      products: []
+    }
+  },
+  methods: {
+    getProductData (query) {
+      const url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/products?category=${query}`
+
+      this.$http.get(url).then((res) => {
+        this.products = res.data.products
+      })
+    }
+  },
+  mounted () {
+    this.getProductData('限定促銷')
+  }
+}
+</script>
+
 <style lang="scss">
 .banner {
-  height: calc(100vh - 68px);
+  height: calc(100vh - 208px);
   background-image: url(https://images.unsplash.com/photo-1616628198591-eaa25811775b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format);
   background-size: cover;
   background-repeat: no-repeat;
@@ -328,9 +321,21 @@
   background-repeat: no-repeat;
   background-position: left center;
 }
+.imageWrapper{
+  height: 220px;
+}
+.card-img-top {
+  object-fit: cover;
+}
 .customer-photo {
   width: 120px;
   height: 120px;
+}
+.customer-credit-star{
+  color: #ffffc2
+}
+.customer-credit-time{
+  color: #fafafa
 }
 .newsletter {
   height: 300px;

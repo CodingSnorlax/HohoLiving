@@ -6,7 +6,7 @@
         <ul
           class="w-100 pt-10 pe-10 me-20 list-unstyled sticky-top product-category-list text-secondary"
         >
-          <h3 class="fs-3 ps-2 pe-4 mb-4">產品類別</h3>
+          <h3 class="fs-3 ps-2 pe-4 mt-24 mb-6">產品類別</h3>
           <li
             class="d-block fs-5 pe-4 ps-2 mb-3 py-1 text-decoration-none product-category-list-item"
             :class="{ isSelected: tempCategory === '' }"
@@ -31,11 +31,11 @@
       <h2 class="text-center text-secondary py-8">好好精選</h2>
       <!-- 卡片 -->
       <div
-        class="col-md-6 col-lg-4"
+        class="col-md-6"
         v-for="product in products"
         :key="product.id"
       >
-        <div class="card border-0 rounded-3 mb-24">
+        <div class="card border-0 rounded-3 mb-12">
           <div class="img-cover rounded-3">
             <img
               :src="product.imageUrl"
@@ -45,12 +45,18 @@
             <span class="badge bg-secondary ms-3 mt-3 text-top fs-5">{{
               product.category
             }}</span>
+            <!-- 加入購物車 btn -->
+            <button
+              class="position-absolute fixed-bottom btn btn-primary text-light px-6 add-to-cart-btn"
+              :disabled="isLoadingItem === product.id"
+              @click="addToCart(product.id)"
+            >
+              <i class="bi bi-cart-plus fs-5 me-2"></i> 加入購物車
+            </button>
           </div>
-          <div class="card-body p-0 d-flex justify-content-between pt-4">
-            <div class="text">
-              <h3
-                class="mb-2 mt-1 fs-5 fw-bold d-flex justify-content-between align-item-center px-3"
-              >
+          <div class="card-body p-0 pt-4">
+            <div class="text d-flex flex-column flex-md-row justify-content-md-between mb-6">
+              <h3 class="mt-1 fs-5 fw-bold align-item-center px-3">
                 <router-link
                   :to="`/product/${product.id}`"
                   class="text-secondary text-decoration-none"
@@ -58,12 +64,12 @@
                 >
               </h3>
               <div v-if="product.origin_price === product.price">
-                <p class="card-text mb-0 px-3 fs-6">
+                <p class="card-text mb-0 px-3 fs-5">
                   $ {{ product.origin_price }}
                 </p>
               </div>
               <div v-else>
-                <p class="card-text mb-0 text-danger fs-6 d-flex px-3">
+                <p class="card-text mb-0 text-danger fs-5 d-flex px-3">
                   <span class="text-secondary me-4"
                     ><del>$ {{ product.origin_price }}</del></span
                   >
@@ -71,15 +77,11 @@
                 </p>
               </div>
             </div>
-            <!-- 加入購物車 btn -->
-            <a class="text-secondary border-start px-6 add-to-cart-btn">
-              <i class="bi bi-cart-plus fs-2"></i>
-            </a>
           </div>
         </div>
       </div>
       <product-pagination
-        class="pt-24"
+        class="pt-12"
         :pages="pagination"
         @get-product-data="getProductData"
       ></product-pagination>
@@ -98,8 +100,9 @@ export default {
       page: 0,
       // 自己寫的 BS component
       pagination: {},
-      // 當下篩選類別，控制狀態樣式
-      tempCategory: ''
+      // 當下篩選類別，控制產品列表選單的狀態樣式
+      tempCategory: '',
+      isLoadingItem: ''
     }
   },
   components: {
@@ -140,6 +143,25 @@ export default {
         .catch((err) => {
           console.log(err)
         })
+    },
+    addToCart (productId, qty = 1) {
+      const url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/cart`
+      const data = {
+        data: {
+          product_id: productId,
+          qty: qty
+        }
+      }
+      this.isLoadingItem = productId
+      this.$http
+        .post(url, data)
+        .then((res) => {
+          console.log(res)
+          this.isLoadingItem = ''
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   },
   mounted () {
@@ -167,6 +189,7 @@ export default {
 }
 .add-to-cart-btn {
   cursor: pointer;
+  z-index: 999;
 }
 .add-to-cart-btn i:hover {
   color: #b5adad;
