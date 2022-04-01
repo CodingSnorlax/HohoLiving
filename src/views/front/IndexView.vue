@@ -58,7 +58,7 @@
       <div class="product-intro-card-section pb-12 d-md-flex">
         <div class="card text-white border-0 mb-8 mb-md-0 me-md-4">
           <img
-            src="../assets/images/handcraft.jpg"
+            src="../../assets/images/handcraft.jpg"
             class="card-img"
             alt="手工打造品味生活"
           />
@@ -74,7 +74,7 @@
 
         <div class="card text-white border-0 mb-8 mb-md-0 me-md-4">
           <img
-            src="../assets/images/detail.jpg"
+            src="../../assets/images/detail.jpg"
             class="card-img"
             alt="注重產品每項細節"
           />
@@ -90,7 +90,7 @@
 
         <div class="card text-white border-0 mb-8 mb-md-0 me-md-4">
           <img
-            src="../assets/images/wood-material.jpg"
+            src="../../assets/images/wood-material.jpg"
             class="card-img"
             alt="堅持選用環保木料"
           />
@@ -129,7 +129,7 @@
             >
               <img
                 class="w-50 rounded-3"
-                src="../assets/images/plant.jpg"
+                src="../../assets/images/plant.jpg"
                 alt=""
               />
             </div>
@@ -161,7 +161,7 @@
             </div>
             <div class="col-9 col-md-12">
               <div class="card-body">
-                <h4 class="mb-4 text-center">購入 ARKELSTORP 實木桌</h4>
+                <h4 class="mb-4 text-center text-light">購入 ARKELSTORP 實木桌</h4>
                 <h5 class="card-title text-center customer-credit-star">
                   商品滿意度 <i class="bi bi-star-fill"></i
                   ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
@@ -196,7 +196,7 @@
             </div>
             <div class="col-9 col-md-12">
               <div class="card-body">
-                <h4 class="mb-4 text-center">購入 DINERA 馬克杯</h4>
+                <h4 class="mb-4 text-center text-light">購入 DINERA 馬克杯</h4>
                 <h5 class="card-title text-center customer-credit-star">
                   商品滿意度 <i class="bi bi-star-fill"></i
                   ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
@@ -230,7 +230,7 @@
             </div>
             <div class="col-9 col-md-12">
               <div class="card-body">
-                <h4 class="mb-4 text-center">購入 OPLEV 門墊</h4>
+                <h4 class="mb-4 text-center text-light">購入 OPLEV 門墊</h4>
                 <h5 class="card-title text-center customer-credit-star">
                   商品滿意度 <i class="bi bi-star-fill"></i
                   ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i

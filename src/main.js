@@ -15,6 +15,8 @@ import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json'
 
 import App from './App.vue'
 import router from './router'
+// 載入自訂的 filters
+import { date, currency } from '../src/methods/filters'
 
 // veevalidate rules
 Object.keys(AllRules).forEach((rule) => {
@@ -32,6 +34,11 @@ configure({
 setLocale('zh_TW')
 
 const app = createApp(App)
+// 載入自訂義 filters
+app.config.globalProperties.$filters = {
+  date,
+  currency
+}
 app.use(VueAxios, axios)
 app.component('Form', Form)
 app.component('Field', Field)

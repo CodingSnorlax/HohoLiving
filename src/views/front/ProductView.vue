@@ -5,12 +5,16 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-white px-0 mb-4 py-3">
           <li class="breadcrumb-item">
-            <router-link to="/" class="text-muted">首頁</router-link>
+            <router-link to="/" class="text-muted text-decoration-none"
+              >首頁</router-link
+            >
           </li>
           <li class="breadcrumb-item">
-            <router-link to="/products" class="text-muted">{{
-              product.category
-            }}</router-link>
+            <router-link
+              to="/products"
+              class="text-muted text-decoration-none"
+              >{{ product.category }}</router-link
+            >
           </li>
           <li class="breadcrumb-item active" aria-current="page">
             {{ product.title }}
@@ -22,45 +26,11 @@
       <div class="row align-items-center">
         <!-- 圖片輪播 -->
         <div class="col-md-6">
-          <div
-            id="carouselExampleControls"
-            class="carousel slide"
-            data-ride="carousel"
-          >
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img
-                  :src="product.imageUrl"
-                  class="d-block w-100"
-                  alt="product.title"
-                />
-              </div>
-            </div>
-            <a
-              class="carousel-control-prev"
-              href="#carouselExampleControls"
-              role="button"
-              data-slide="prev"
-            >
-              <span
-                class="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a
-              class="carousel-control-next"
-              href="#carouselExampleControls"
-              role="button"
-              data-slide="next"
-            >
-              <span
-                class="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="sr-only">Next</span>
-            </a>
-          </div>
+          <img
+            :src="product.imageUrl"
+            class="d-block w-100"
+            alt="product.title"
+          />
         </div>
         <!-- 產品詳細資料 -->
         <div class="col-md-6">
@@ -157,18 +127,65 @@
                 </div>
               </div>
               <!-- 按鈕組結束 -->
-              <div class="product-info mt-12 mb-8 rounded-3">
-                <!-- 產品資訊 -->
-                <div class="warning-section rounded-3 px-4 pt-2">
-                  <h4 class="text-light fs-5 mb-2">產品規格</h4>
-                  <p class="fw-light fs-6 text-light pb-2">
-                    {{ product.content }}
-                  </p>
-                </div>
-              </div>
+              <div class="product-info mt-12 mb-8 rounded-3"></div>
             </div>
           </div>
         </div>
+        <div class="row mb-12">
+          <div class="col-md-6">
+            <div class="card px-8 mt-4">
+              <h3 class="text-secondary mt-8 mb-4">
+                <i class="bi bi-book-half me-2"></i> 品牌故事
+              </h3>
+              <p class="fs-5">{{ product.content }}</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card px-8 mt-4">
+              <h3 class="text-secondary mt-8 mb-4">
+                <i class="bi bi-rulers me-2"></i> 產品規格
+              </h3>
+              <p class="fs-5">{{ product.content }}</p>
+            </div>
+          </div>
+          <div class="col-12">
+            <!-- 產品資訊 -->
+            <div class="memo-section rounded-3 mt-12 px-8 py-10">
+              <h3 class="text-light fs-4 mb-8">
+                <i class="bi bi-list-check me-2 fs-3"></i> 下 單 前 的 溫 馨 小
+                提 醒
+              </h3>
+              <ul class="text-light">
+                <li class="mb-4">
+                  購買沙發、椅子、桌子...等大型商品時，礙於材積的限制，我們無法提供您使用超商取貨，但可採取貨到付款方式收貨。
+                </li>
+                <li class="mb-4">
+                  由於每位顧客的硬體設備會不太一樣，使得實際的商品與商品圖會產生色差，敬請見諒。
+                </li>
+                <li class="mb-4">
+                  好好生活的熱銷商品經常是限量的，若遇到官網無法即時更新，下單後有缺貨之情事，還需以實際庫存為主，不過我們同時也會以
+                  email 告知商品缺貨。
+                </li>
+                <li class="mb-4">
+                  請您在加入會員時，務必要留下正確手機號碼或
+                  email，方便我們在必要時與您聯繫。
+                </li>
+                <li class="mb-4">
+                  當您的訂單成立後，我們將會以最快速度寄出您的貨物，但視當時物流配送狀況，一般仍需要
+                  3 ~ 5 個工作天，您才會收到物品。
+                </li>
+                <li class="mb-4">
+                  若您有急件的訂單，煩請來電 (02-1357-9246) 與我們聯繫。
+                </li>
+                <li class="mb-4">
+                  若您在購買前，還是對商品還有任何疑問，歡迎直接來信或於上班時間來電詢問。
+                </li>
+              </ul>
+            </div>
+            <!-- warning sec -->
+          </div>
+        </div>
+        <!-- 資料 row 尾巴 -->
       </div>
     </div>
   </div>
@@ -262,7 +279,7 @@ export default {
 </script>
 
 <style lang="scss">
-.warning-section {
+.memo-section {
   background-color: #bababc;
 }
 </style>

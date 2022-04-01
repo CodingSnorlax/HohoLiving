@@ -4,60 +4,93 @@ const routes = [
   // 前台
   {
     path: '/',
-    component: () => import('../views/FrontView.vue'),
+    component: () => import('../views/front/FrontView.vue'),
     children: [
       {
         path: '',
-        component: () => import('../views/IndexView.vue')
+        component: () => import('../views/front/IndexView.vue')
       },
       {
-        path: '/about',
+        path: 'about',
         name: 'about',
-        component: () => import('../views/AboutView.vue')
+        component: () => import('../views/front/AboutView.vue')
       },
       {
-        path: '/customerService',
+        path: 'customerService',
         name: 'customerService',
-        component: () => import('../views/CustomerService.vue')
+        component: () => import('../views/front/CustomerService.vue')
       },
       {
-        path: '/products',
+        path: 'products',
         name: 'products',
-        component: () => import('../views/ProductsView.vue')
+        component: () => import('../views/front/ProductsView.vue')
       },
       {
-        path: '/product/:id',
+        path: 'product/:id',
         name: 'product',
-        component: () => import('../views/ProductView.vue')
+        component: () => import('../views/front/ProductView.vue')
       },
       {
-        path: '/cart',
+        path: 'cart',
         name: 'cart',
-        component: () => import('../views/CartView.vue')
+        component: () => import('../views/front/CartView.vue')
       },
       {
-        path: '/order',
+        path: 'order',
         name: 'order',
-        component: () => import('../views/OrderView.vue')
+        component: () => import('../views/front/OrderView.vue')
       },
       {
-        path: '/checkorder/:orderId',
+        path: 'checkorder/:orderId',
         name: 'checkorder',
-        component: () => import('../views/CheckorderView.vue')
+        component: () => import('../views/front/CheckorderView.vue')
       },
       {
-        path: '/checkout/:orderId',
+        path: 'checkout/:orderId',
         name: 'checkout',
-        component: () => import('../views/CheckoutView.vue')
+        component: () => import('../views/front/CheckoutView.vue')
       }
     ]
+  },
+  {
+    path: '/login',
+    component: () => import('../views/LoginView.vue')
+  },
+  {
+    path: '/admin',
+    component: () => import('../views/admin/DashboardView.vue'),
+    children: [
+      {
+        path: 'adminProducts',
+        component: () => import('../views/admin/AdminProducts.vue')
+      },
+      {
+        path: 'adminOrders',
+        component: () => import('../views/admin/AdminOrders.vue')
+      },
+      {
+        path: 'adminCoupons',
+        component: () => import('../views/admin/AdminCoupons.vue')
+      }
+    ]
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: () => import('../views/404Page.vue')
   }
 ]
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
-  linkActiveClass: 'active'
+  linkActiveClass: 'active',
+  // 切換頁面時滾至頂部
+  scrollBehavior () {
+    return {
+      top: 0,
+      behavior: 'smooth'
+    }
+  }
 })
 
 export default router

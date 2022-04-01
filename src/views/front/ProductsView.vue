@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import ProductPagination from '../components/ProductPagination.vue'
+import ProductPagination from '../../components/ProductPagination.vue'
 
 export default {
   data () {
