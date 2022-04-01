@@ -158,6 +158,17 @@
                 </textarea>
               </div>
               <div class="mb-3">
+                <label for="content" class="form-label">品牌故事</label>
+                <textarea
+                  id="description"
+                  type="text"
+                  class="form-control"
+                  placeholder="請輸入品牌故事"
+                  v-model="tempProductObj.brandStory"
+                >
+                </textarea>
+              </div>
+              <div class="mb-3">
                 <label for="content" class="form-label">說明內容</label>
                 <textarea
                   id="description"

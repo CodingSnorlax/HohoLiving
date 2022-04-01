@@ -137,7 +137,7 @@
               <h3 class="text-secondary mt-8 mb-4">
                 <i class="bi bi-book-half me-2"></i> 品牌故事
               </h3>
-              <p class="fs-5">{{ product.content }}</p>
+              <p class="fs-5">{{ product.brandStory }}</p>
             </div>
           </div>
           <div class="col-md-6">
