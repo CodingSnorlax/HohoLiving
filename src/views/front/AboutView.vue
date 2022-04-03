@@ -21,7 +21,7 @@
         <div class="col-md-6">
           <div class="teamText bg-primary text-light px-md-8 py-8 py-md-12">
             <h3
-              class="py-2 text-light text-center mb-6 d-flex justify-content-center"
+              class="py-2 text-light mb-6 text-center text-md-start"
             >
               團隊簡介
             </h3>
@@ -33,7 +33,7 @@
               />
             </div>
 
-            <div class="team-intro-text ms-6 ms-md-0 px-md-16">
+            <div class="team-intro-text ms-6 ms-md-0">
               <p class="mb-4">
                 我們是一群熱愛室內設計的夥伴，<br />也是在 Goldsmith
                 唸書時的同學。<br />
@@ -60,7 +60,7 @@
       <div class="row mb-12">
         <div class="col-md-6">
           <div class="text bg-primary px-md-8 py-8 py-md-12">
-            <h3 class="py-2 text-light text-center mb-6">創辦人 Jeffery</h3>
+            <h3 class="py-2 text-light text-center text-md-start mb-6">創辦人 Jeffery</h3>
             <div class="d-block d-md-none">
               <img
                 class="w-100 mb-6"
@@ -68,7 +68,7 @@
                 alt="jeffery"
               />
             </div>
-            <p class="text-light ms-6">
+            <p class="text-light ms-6 ms-md-0">
               Jeffery 從小穿著習慣輕鬆隨意，<br />
               但卻非常注重生活品質。<br />
               在一次誤打誤撞之下，Jeffery 在歐洲一個偏遠小鎮的市集，<br />
@@ -104,8 +104,8 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div class="text bg-primary py-8">
-            <h3 class="py-2 text-light text-center mb-6">創意總監 Regina</h3>
+          <div class="text bg-primary px-md-8 py-8 py-md-12">
+            <h3 class="py-2 text-light text-center text-md-start mb-6">創意總監 Regina</h3>
             <div class="d-block d-md-none">
               <img
                 class="w-100 mb-6"
@@ -113,7 +113,7 @@
                 alt="regina"
               />
             </div>
-            <p class="text-light ms-6">
+            <p class="text-light ms-6 ms-md-0">
               Regina 從學生時代起，就非常著迷於研究家具，<br />
               在 Goldsmith 求學期間，<br />
               便已到過 Kelly Hoppen 的工作室實習，<br />
@@ -131,8 +131,8 @@
       <!-- Elly -->
       <div class="row mb-12">
         <div class="col-md-6">
-          <div class="text bg-primary py-8">
-            <h3 class="py-2 text-light text-center mb-6">財務長 Elly</h3>
+          <div class="text bg-primary px-md-8 py-8 py-md-12">
+            <h3 class="py-2 text-light text-center text-md-start mb-6">財務長 Elly</h3>
             <div class="d-block d-md-none">
               <img
                 class="w-100 mb-6"
@@ -140,7 +140,7 @@
                 alt="elly"
               />
             </div>
-            <p class="text-light ms-6">
+            <p class="text-light ms-6 ms-md-0">
               Elly 原先以為自己畢業後會回到家族經營的會計事務所工作，<br />
               沒有想到認識了 Jeffery 和 Regina，<br />
               就此進入了室內設計產業，連她自己都有些意外。<br />

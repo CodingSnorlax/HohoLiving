@@ -10,11 +10,12 @@
             >
           </li>
           <li class="breadcrumb-item">
-            <router-link
-              to="/products"
-              class="text-muted text-decoration-none"
-              >{{ product.category }}</router-link
+            <router-link to="/products" class="text-muted text-decoration-none"
+              >好好精選</router-link
             >
+          </li>
+          <li class="breadcrumb-item text-muted">
+            {{ product.category }}
           </li>
           <li class="breadcrumb-item active" aria-current="page">
             {{ product.title }}
@@ -214,20 +215,22 @@
             }"
             class="mySwiper"
           >
-            <swiper-slide v-for="item in swiperData" :key="item.id">
-              <div class="card overflow-hidden">
-                <div class="img-cover rounded-3">
-                  <router-link :to="`/product/${item.id}`">
-                    <img :src="item.imageUrl" class="h-100" />
-                  </router-link>
-                </div>
+            <template v-if="swiperData.length">
+              <swiper-slide v-for="item in swiperData" :key="item.id">
+                <div class="card overflow-hidden">
+                  <div class="img-cover rounded-3">
+                    <router-link :to="`/product/${item.id}`">
+                      <img :src="item.imageUrl" class="h-100" />
+                    </router-link>
+                  </div>
 
-                <div class="card-body">
-                  <h5 class="card-title">{{ item.title }}</h5>
-                  <p class="card-text">$ {{ item.price }}</p>
-                </div>
-              </div></swiper-slide
-            >
+                  <div class="card-body">
+                    <h5 class="card-title">{{ item.title }}</h5>
+                    <p class="card-text">$ {{ item.price }}</p>
+                  </div>
+                </div></swiper-slide
+              >
+            </template>
           </swiper>
         </div>
       </div>
@@ -258,6 +261,8 @@ export default {
       cartData: [],
       // swiper module
       modules: [Autoplay],
+      // 過濾資料暫存區
+      tempData: [],
       swiperData: [],
       pageId: this.$route.params.id
     }
@@ -270,26 +275,14 @@ export default {
     }
   },
   methods: {
-    getCategoryData () {
-      this.$http
-        .get(
-          `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/products/all`
-        )
-        .then((res) => {
-          const tempCategory = []
-          res.data.products.forEach((product) => {
-            tempCategory.push(product.category)
-          })
-          this.category = [...new Set(tempCategory)]
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    },
     getSwiperData () {
       const url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/products`
       this.$http.get(url).then((res) => {
-        this.swiperData = res.data.products
+        this.tempData = res.data.products
+        // 若跟這一頁相同的產品，就不再讓 swiper 抓這筆資料
+        this.swiperData = this.tempData.filter(
+          (item) => item.id !== this.pageId
+        )
       })
     },
     getOneProductData () {
@@ -364,7 +357,6 @@ export default {
   },
   mounted () {
     this.getOneProductData()
-    this.getCategoryData()
     this.getSwiperData()
   }
 }

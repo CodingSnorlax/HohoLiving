@@ -120,6 +120,8 @@
 </template>
 
 <script>
+import emitter from '@/libs/emitter'
+
 export default {
   data () {
     return {
@@ -150,6 +152,7 @@ export default {
       this.$http
         .post(url)
         .then((res) => {
+          emitter.emit('get-cart-data')
           console.log(res.data.success)
           if (res.data.success === true) {
             this.$router.push(`/checkout/${this.orderId}`)
