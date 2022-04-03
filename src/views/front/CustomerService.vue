@@ -1,55 +1,6 @@
 <template>
   <div class="container">
     <div class="main text-secondary">
-      <!-- swiper 動態 -->
-      <swiper
-        :slidesPerView="1.5"
-        :spaceBetween="5"
-        :centeredSlides="true"
-        :autoplay="{
-          delay: 2500,
-          disableOnInteraction: false
-        }"
-        :navigation="true"
-        :modules="modules"
-        class="mySwiper"
-      >
-        <swiper-slide
-          ><div class="card" style="width: 18rem">
-            <img
-              src="https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_720/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/t9ur9cc1khkup1dmcbzd/IMG%E5%86%92%E9%9A%AA%E6%A8%82%E5%9C%92.jpg"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <h5 class="card-title">第 1111111 張卡片</h5>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div></swiper-slide
-        >
-        <swiper-slide
-          ><div class="card" style="width: 18rem">
-            <img
-              src="https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_720/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/t9ur9cc1khkup1dmcbzd/IMG%E5%86%92%E9%9A%AA%E6%A8%82%E5%9C%92.jpg"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <h5 class="card-title">第 222222 張卡片</h5>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div></swiper-slide
-        >
-      </swiper>
-
       <div class="row justify-content-center">
         <div class="col-md-8">
           <h2 class="py-8 text-center">常見問題</h2>
@@ -378,29 +329,3 @@
     </div>
   </div>
 </template>
-
-<script>
-// Import Swiper Vue.js components
-import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue.js'
-// import required modules
-import { Autoplay } from 'swiper'
-// Import Swiper styles
-import 'swiper/swiper.scss' // core Swiper
-
-export default {
-  data () {
-    return {}
-  },
-  components: {
-    Swiper,
-    SwiperSlide
-  },
-  setup () {
-    return {
-      modules: [Autoplay]
-    }
-  },
-  methods: {},
-  mounted () {}
-}
-</script>

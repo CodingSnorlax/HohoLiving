@@ -200,6 +200,7 @@ export default {
 </script>
 
 <style>
+/* 選單列表手機版 */
 .subNav {
   height: 3.5rem; /* 隱藏下方捲軸 */
   overflow-y: hidden;

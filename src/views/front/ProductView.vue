@@ -40,14 +40,14 @@
               <span class="badge bg-primary text-light fs-5 mb-4">{{
                 product.category
               }}</span>
-              <h2 class="fw-bold mb-4">{{ product.title }}</h2>
+              <h2 class="fw-bold mb-12">{{ product.title }}</h2>
               <!-- 產品介紹 -->
               <div class="mb-12">
                 <p class="fw-light fs-4">{{ product.description }}</p>
               </div>
 
               <!-- 產品價格 -->
-              <div class="price mb-2">
+              <div class="price mb-12">
                 <div
                   v-if="product.origin_price === product.price"
                   class="fs-4 text-danger"
@@ -131,7 +131,7 @@
             </div>
           </div>
         </div>
-        <div class="row mb-12">
+        <div class="row my-12">
           <div class="col-md-6">
             <div class="card px-8 mt-4">
               <h3 class="text-secondary mt-8 mb-4">
@@ -187,21 +187,109 @@
         </div>
         <!-- 資料 row 尾巴 -->
       </div>
+      <div class="row my-12">
+        <h2 class="text-secondary pt-4 pb-8">猜你也會喜歡</h2>
+        <div class="col-12">
+          <!-- swiper 動態 -->
+          <swiper
+            :slidesPerView="1"
+            :spaceBetween="24"
+            :centeredSlides="false"
+            :autoplay="{
+              delay: 2500,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true
+            }"
+            :navigation="true"
+            :modules="modules"
+            :breakpoints="{
+              '768': {
+                slidesPerView: 2,
+                spaceBetween: 30
+              },
+              '1024': {
+                slidesPerView: 3,
+                spaceBetween: 30
+              }
+            }"
+            class="mySwiper"
+          >
+            <swiper-slide v-for="item in swiperData" :key="item.id">
+              <div class="card overflow-hidden">
+                <div class="img-cover rounded-3">
+                  <router-link :to="`/product/${item.id}`">
+                    <img :src="item.imageUrl" class="h-100" />
+                  </router-link>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">{{ item.title }}</h5>
+                  <p class="card-text">$ {{ item.price }}</p>
+                </div>
+              </div></swiper-slide
+            >
+          </swiper>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue.js'
+// import required modules
+import { Autoplay } from 'swiper'
+// Import Swiper styles
+import 'swiper/swiper.scss' // core Swiper
 export default {
+  components: {
+    Swiper,
+    SwiperSlide
+  },
   data () {
     return {
       product: [],
+      category: [],
       isLoadingItem: '',
       editProductNum: false,
-      cartData: []
+      cartData: [],
+      // swiper module
+      modules: [Autoplay],
+      swiperData: [],
+      pageId: this.$route.params.id
+    }
+  },
+  watch: {
+    // 監聽動態 route
+    $route (to) {
+      this.pageId = to.params.id
+      this.getOneProductData()
     }
   },
   methods: {
+    getCategoryData () {
+      this.$http
+        .get(
+          `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/products/all`
+        )
+        .then((res) => {
+          const tempCategory = []
+          res.data.products.forEach((product) => {
+            tempCategory.push(product.category)
+          })
+          this.category = [...new Set(tempCategory)]
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    getSwiperData () {
+      const url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/products`
+      this.$http.get(url).then((res) => {
+        this.swiperData = res.data.products
+      })
+    },
     getOneProductData () {
       // 取得單一產品 id (route)
       const { id } = this.$route.params
@@ -273,12 +361,21 @@ export default {
   },
   mounted () {
     this.getOneProductData()
-    // this.id = this.$route.params.id
+    this.getCategoryData()
+    this.getSwiperData()
   }
 }
 </script>
 
-<style lang="scss">
+<style>
+.img-cover {
+  height: 300px;
+  width: 100%;
+}
+.img-cover img {
+  width: 100%;
+  object-fit: cover;
+}
 .memo-section {
   background-color: #bababc;
 }
