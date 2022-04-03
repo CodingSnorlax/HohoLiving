@@ -1,6 +1,55 @@
 <template>
   <div class="container">
     <div class="main text-secondary">
+      <!-- swiper 動態 -->
+      <swiper
+        :slidesPerView="1.5"
+        :spaceBetween="5"
+        :centeredSlides="true"
+        :autoplay="{
+          delay: 2500,
+          disableOnInteraction: false
+        }"
+        :navigation="true"
+        :modules="modules"
+        class="mySwiper"
+      >
+        <swiper-slide
+          ><div class="card" style="width: 18rem">
+            <img
+              src="https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_720/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/t9ur9cc1khkup1dmcbzd/IMG%E5%86%92%E9%9A%AA%E6%A8%82%E5%9C%92.jpg"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">第 1111111 張卡片</h5>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div></swiper-slide
+        >
+        <swiper-slide
+          ><div class="card" style="width: 18rem">
+            <img
+              src="https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_720/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/t9ur9cc1khkup1dmcbzd/IMG%E5%86%92%E9%9A%AA%E6%A8%82%E5%9C%92.jpg"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">第 222222 張卡片</h5>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div></swiper-slide
+        >
+      </swiper>
+
       <div class="row justify-content-center">
         <div class="col-md-8">
           <h2 class="py-8 text-center">常見問題</h2>
@@ -146,7 +195,9 @@
                   <div class="accordion-body">
                     <ul class="list-unstyled mt-6">
                       <li class="mb-2">1. 將商品放入購物車</li>
-                      <li class="mb-2">2. 點選畫面中右上方購物車圖示，查詢購物清單</li>
+                      <li class="mb-2">
+                        2. 點選畫面中右上方購物車圖示，查詢購物清單
+                      </li>
                       <li class="mb-2">3. 修改商品數量</li>
                       <li class="mb-2">4. 填寫、確認收件資訊</li>
                       <li class="mb-2">5. 完成結帳</li>
@@ -176,10 +227,14 @@
                 >
                   <div class="accordion-body">
                     <ul>
-                      <li class="mb-2">相同的優惠碼，每組會員帳號僅能使用一次</li>
+                      <li class="mb-2">
+                        相同的優惠碼，每組會員帳號僅能使用一次
+                      </li>
                       <li class="mb-2">優惠碼的使用名額有限</li>
                       <li class="mb-2">優惠碼使用期限已截止，將不可再使用</li>
-                      <li class="mb-2">購物車內的商品不可套用優惠券時，優惠碼亦無效</li>
+                      <li class="mb-2">
+                        購物車內的商品不可套用優惠券時，優惠碼亦無效
+                      </li>
                       <li class="mb-2">記名的優惠碼限特定會員帳號使用</li>
                     </ul>
                   </div>
@@ -309,8 +364,9 @@
                   data-bs-parent="#accordionExample"
                 >
                   <div class="accordion-body">
-                    深受大家喜愛的<strong> 好好生活 hoholiving 年度家具型錄 </strong>自
-                    2021
+                    深受大家喜愛的<strong>
+                      好好生活 hoholiving 年度家具型錄 </strong
+                    >自 2021
                     年秋季起停刊，主要是考量到媒體消費和顧客行為已發生變化，因此我們將轉仰賴數位平台，提供顧客更多居家佈置靈感。
                   </div>
                 </div>
@@ -322,3 +378,29 @@
     </div>
   </div>
 </template>
+
+<script>
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue.js'
+// import required modules
+import { Autoplay } from 'swiper'
+// Import Swiper styles
+import 'swiper/swiper.scss' // core Swiper
+
+export default {
+  data () {
+    return {}
+  },
+  components: {
+    Swiper,
+    SwiperSlide
+  },
+  setup () {
+    return {
+      modules: [Autoplay]
+    }
+  },
+  methods: {},
+  mounted () {}
+}
+</script>

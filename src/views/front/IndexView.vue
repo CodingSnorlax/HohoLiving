@@ -7,7 +7,7 @@
         <h1 class="text-white">好好生活</h1>
         <h2 class="text-white">存在家中每個角落</h2>
       </div>
-      <button class="btn btn-primary text-white">點我逛逛</button>
+      <button @click="goShopping" class="btn btn-primary text-white">點我逛逛</button>
     </div>
   </div>
   <!-- 手機版 banner -->
@@ -18,7 +18,7 @@
         <h1 class="text-secondary">好好生活</h1>
         <h2 class="text-secondary">存在家中每個角落</h2>
       </div>
-      <button class="btn btn-secondary text-white">點我逛逛</button>
+      <button @click="goShopping" class="btn btn-secondary text-white">點我逛逛</button>
     </div>
   </div>
   <!-- 好好精選 -->
@@ -298,6 +298,9 @@ export default {
       this.$http.get(url).then((res) => {
         this.products = res.data.products
       })
+    },
+    goShopping () {
+      this.$router.push('/products')
     }
   },
   mounted () {

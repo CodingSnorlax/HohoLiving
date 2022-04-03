@@ -10,7 +10,6 @@
         建立優惠券
       </button>
     </div>
-    {{ coupons }}
     <table class="table mt-4">
       <thead>
         <tr>

@@ -1,12 +1,39 @@
 <template>
-  <div class="container d-flex">
+  <div class="container d-md-flex">
+    <h2 class="text-center text-secondary py-8 d-block d-md-none">好好精選</h2>
     <!-- 產品類別選單 -->
-    <div class="row">
-      <div class="col-12">
+    <div class="row g-2">
+      <div class="d-block d-md-none">
+        <nav class="subNav mb-6">
+          <div class="container">
+            <ul
+              class="list-unstyled subNavList d-flex justify-content-md-center"
+            >
+              <li
+                class="d-block fs-5 px-6 mb-3 py-1 text-decoration-none product-category-list-item"
+                :class="{ isSelectedPhone: tempCategory === '' }"
+                @click="getProductData(page, '')"
+              >
+                全部商品
+              </li>
+              <template v-for="item in category" :key="item">
+                <li
+                  class="d-block fs-5 px-6 mb-3 py-1 text-decoration-none product-category-list-item"
+                  :class="{ isSelectedPhone: tempCategory === item }"
+                  @click="getProductData(page, item)"
+                >
+                  {{ item }}
+                </li>
+              </template>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="d-none d-md-block">
         <ul
-          class="w-100 pt-10 pe-10 me-20 list-unstyled sticky-top product-category-list text-secondary"
+          class="w-100 pt-10 pb-8 pe-10 me-20 list-unstyled sticky-top product-category-list text-secondary"
         >
-          <h3 class="fs-3 ps-2 pe-4 mt-24 mb-6">產品類別</h3>
+          <h3 class="fs-3 ps-2 pe-4 mt-8 mb-6">產品類別</h3>
           <li
             class="d-block fs-5 pe-4 ps-2 mb-3 py-1 text-decoration-none product-category-list-item"
             :class="{ isSelected: tempCategory === '' }"
@@ -27,21 +54,19 @@
       </div>
     </div>
     <!-- 主要商品列表區 (卡片) -->
-    <div class="row g-10">
-      <h2 class="text-center text-secondary py-8">好好精選</h2>
+    <div class="row g-md-10">
+      <h2 class="text-center text-secondary py-8 d-none d-md-block">好好精選</h2>
       <!-- 卡片 -->
-      <div
-        class="col-md-6"
-        v-for="product in products"
-        :key="product.id"
-      >
-        <div class="card border-0 rounded-3 mb-12">
+      <div class="col-md-6" v-for="product in products" :key="product.id">
+        <div class="card border-0 rounded-3 mb-8 mb-md-12">
           <div class="img-cover rounded-3">
-            <img
-              :src="product.imageUrl"
-              class="card-img-top rounded-0 h-100 text-overlay-img rounded-3"
-              :alt="product.title"
-            />
+            <router-link :to="`/product/${product.id}`" class="stretch-link">
+              <img
+                :src="product.imageUrl"
+                class="card-img-top rounded-0 h-100 text-overlay-img rounded-3"
+                :alt="product.title"
+              />
+            </router-link>
             <span class="badge bg-secondary ms-3 mt-3 text-top fs-5">{{
               product.category
             }}</span>
@@ -55,11 +80,13 @@
             </button>
           </div>
           <div class="card-body p-0 pt-4">
-            <div class="text d-flex flex-column flex-md-row justify-content-md-between mb-6">
+            <div
+              class="text d-flex flex-column flex-md-row justify-content-md-between mb-6"
+            >
               <h3 class="mt-1 fs-5 fw-bold align-item-center px-3">
                 <router-link
                   :to="`/product/${product.id}`"
-                  class="text-secondary text-decoration-none"
+                  class="text-secondary text-decoration-none stretch-link"
                   >{{ product.title }}</router-link
                 >
               </h3>
@@ -81,7 +108,7 @@
         </div>
       </div>
       <product-pagination
-        class="pt-12"
+        class="pt-16 mb-10"
         :pages="pagination"
         @get-product-data="getProductData"
       ></product-pagination>
@@ -173,6 +200,27 @@ export default {
 </script>
 
 <style>
+.subNav {
+  height: 3.5rem; /* 隱藏下方捲軸 */
+  overflow-y: hidden;
+}
+
+.subNavList {
+  flex-wrap: nowrap;
+  padding-top: 0.6rem;
+  padding-bottom: 1.5rem; /* 隱藏下方捲軸 */
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.subNavListItem a {
+  color: #707070;
+  padding: 0 10px;
+}
+
+.isSelectedPhone {
+  border-bottom: 2px solid #b5adad;
+}
 /* 卡片圖片樣式設定 */
 .img-cover {
   height: 280px;
