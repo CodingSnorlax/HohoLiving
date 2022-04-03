@@ -38,9 +38,9 @@
               ><i class="bi bi-cart-fill fs-3 text-dark"></i>
               <span
                 class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                :class="{ 'visually-hidden': cartData.carts?.length === 0 }"
               >
                 {{ cartData.carts?.length }}
-                <span class="visually-hidden">unread messages</span>
               </span></router-link
             >
           </div>
@@ -77,15 +77,15 @@
           </a>
           <a href="#"><i class="bi bi-heart-fill fs-4 text-dark me-8"></i></a> -->
           <router-link to="/cart" class="position-relative"
-              ><i class="bi bi-cart-fill fs-3 text-dark"></i>
-              <!-- 待解決：loading 畫面進來的時候，數字沒有但有紅點 -->
-              <span
-                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                :class="{'visually-hidden': cartData.carts?.length === 0}"
-              >
-                {{ cartData.carts?.length }}
-              </span></router-link
+            ><i class="bi bi-cart-fill fs-3 text-dark"></i>
+            <!-- 待解決：loading 畫面進來的時候，數字沒有但有紅點 -->
+            <span
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              :class="{ 'visually-hidden': cartData.carts?.length === 0 }"
             >
+              {{ cartData.carts?.length }}
+            </span></router-link
+          >
         </div>
       </nav>
       <div class="phone-display-section text-center">
@@ -151,9 +151,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.logo {
-  text-decoration: none;
-}
-</style>

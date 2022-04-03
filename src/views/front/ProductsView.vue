@@ -118,6 +118,7 @@
 
 <script>
 import ProductPagination from '../../components/ProductPagination.vue'
+import emitter from '@/libs/emitter'
 
 export default {
   data () {
@@ -184,6 +185,7 @@ export default {
         .post(url, data)
         .then((res) => {
           console.log(res)
+          emitter.emit('get-cart-data')
           this.isLoadingItem = ''
         })
         .catch((err) => {

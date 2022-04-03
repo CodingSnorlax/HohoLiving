@@ -123,7 +123,13 @@
                     總額<span>$ {{ parseInt(cartData.total) }}</span>
                   </li>
                   <li class="d-flex justify-content-between mb-5">
-                    折扣<span>- $ {{ parseInt(cartData.total) - parseInt(cartData.final_total) }}</span>
+                    折扣<span
+                      >- $
+                      {{
+                        parseInt(cartData.total) -
+                        parseInt(cartData.final_total)
+                      }}</span
+                    >
                   </li>
                   <li class="mb-5">
                     <p class="text-info fw-light">使用優惠碼</p>
@@ -151,7 +157,9 @@
                     class="d-flex justify-content-between fw-bold border-top border-bottom py-6"
                   >
                     <span class="fs-6">結帳金額</span>
-                    <span class="fs-4">$ {{ parseInt(cartData.final_total) }}</span>
+                    <span class="fs-4"
+                      >$ {{ parseInt(cartData.final_total) }}</span
+                    >
                   </li>
                 </ul>
 
@@ -175,6 +183,8 @@
 </template>
 
 <script>
+import emitter from '@/libs/emitter'
+
 export default {
   data () {
     return {
@@ -231,8 +241,10 @@ export default {
       this.$http
         .delete(url)
         .then((res) => {
+          emitter.emit('get-cart-data')
           console.log(res)
           this.isLoadingItem = ''
+
           this.getCartData()
         })
         .catch((err) => {

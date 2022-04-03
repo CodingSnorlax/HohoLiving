@@ -242,6 +242,8 @@ import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue.js'
 import { Autoplay } from 'swiper'
 // Import Swiper styles
 import 'swiper/swiper.scss' // core Swiper
+import emitter from '@/libs/emitter'
+
 export default {
   components: {
     Swiper,
@@ -311,6 +313,7 @@ export default {
       this.$http
         .post(url, data)
         .then((res) => {
+          emitter.emit('get-cart-data')
           alert(res.data.message)
           if (res.data.success) {
             this.editProductNum = true
