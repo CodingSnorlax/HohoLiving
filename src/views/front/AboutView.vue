@@ -19,7 +19,7 @@
           <!-- 照片 -->
         </div>
         <div class="col-md-6">
-          <div class="teamText bg-primary text-light px-md-8 py-8 py-md-12">
+          <div class="teamText bg-primary text-light px-md-8 py-4">
             <h3
               class="py-2 text-light mb-6 text-center text-md-start"
             >
@@ -55,7 +55,7 @@
       <!-- Jeffery -->
       <div class="row mb-12">
         <div class="col-md-6">
-          <div class="text bg-primary px-md-8 py-8 py-md-12">
+          <div class="text bg-primary px-md-8 py-4">
             <h3 class="py-2 text-light text-center text-md-start mb-6">創辦人 Jeffery</h3>
             <div class="d-block d-md-none">
               <img
@@ -100,7 +100,7 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div class="text bg-primary px-md-8 py-8 py-md-12">
+          <div class="text bg-primary px-md-8 py-4 py-md-12">
             <h3 class="py-2 text-light text-center text-md-start mb-6">創意總監 Regina</h3>
             <div class="d-block d-md-none">
               <img
@@ -127,7 +127,7 @@
       <!-- Elly -->
       <div class="row mb-12">
         <div class="col-md-6">
-          <div class="text bg-primary px-md-8 py-8 py-md-12">
+          <div class="text bg-primary px-md-8 py-4 py-md-12">
             <h3 class="py-2 text-light text-center text-md-start mb-6">財務長 Elly</h3>
             <div class="d-block d-md-none">
               <img
