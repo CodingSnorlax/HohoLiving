@@ -12,17 +12,17 @@
           <!-- nav links -->
           <ul class="d-flex list-unstyled me-8">
             <li class="pt-3 active">
-              <router-link class="nav-link pe-2" to="/products"
+              <router-link class="nav-link pe-2 text-secondary" to="/products"
                 >好好精選</router-link
               >
             </li>
             <li class="pt-3">
-              <router-link class="nav-link pe-2" to="/customerService"
+              <router-link class="nav-link pe-2 text-secondary" to="/customerService"
                 >常見問題</router-link
               >
             </li>
             <li class="pt-3">
-              <router-link class="nav-link pe-2" to="/about"
+              <router-link class="nav-link pe-2 text-secondary" to="/about"
                 >關於我們</router-link
               >
             </li>
@@ -96,17 +96,17 @@
         >
           <ul class="navbar-nav me-8 pb-4">
             <li class="nav-item active">
-              <router-link class="nav-link pe-2" to="/products"
+              <router-link class="nav-link pe-2 text-secondary" to="/products"
                 >好好精選</router-link
               >
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pe-2" to="/customerService"
+              <router-link class="nav-link pe-2 text-secondary" to="/customerService"
                 >常見問題</router-link
               >
             </li>
             <li class="nav-item">
-              <router-link class="nav-link pe-2" to="/about"
+              <router-link class="nav-link pe-2 text-secondary" to="/about"
                 >關於我們</router-link
               >
             </li>
@@ -118,14 +118,13 @@
 </template>
 
 <script>
-import emitter from '@/libs/emitter'
-
 export default {
   data () {
     return {
       cartData: []
     }
   },
+  inject: ['emitter'],
   methods: {
     getCartData () {
       this.$http
@@ -145,7 +144,7 @@ export default {
     this.getCartData()
 
     // 綁定購物車與 navbar 上的品項新增數量
-    emitter.on('get-cart-data', () => {
+    this.emitter.on('get-cart-data', () => {
       this.getCartData()
     })
   }

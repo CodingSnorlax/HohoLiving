@@ -23,7 +23,7 @@
               rules="email|required"
               v-model="form.user.email"
             ></Field>
-            <error-message name="信箱" class="invalid-feedback"></error-message>
+            <ErrorMessage name="信箱" class="invalid-feedback" />
           </div>
 
           <div class="mb-3">
@@ -38,7 +38,7 @@
               rules="required"
               v-model="form.user.name"
             ></Field>
-            <error-message name="姓名" class="invalid-feedback"></error-message>
+            <ErrorMessage name="姓名" class="invalid-feedback" />
           </div>
 
           <div class="mb-3">
@@ -53,7 +53,7 @@
               :rules="isPhone"
               v-model="form.user.tel"
             ></Field>
-            <error-message name="電話" class="invalid-feedback"></error-message>
+            <ErrorMessage name="電話" class="invalid-feedback" />
           </div>
 
           <div class="mb-3">
@@ -68,7 +68,7 @@
               rules="required"
               v-model="form.user.address"
             ></Field>
-            <error-message name="地址" class="invalid-feedback"></error-message>
+            <ErrorMessage name="地址" class="invalid-feedback" />
           </div>
 
           <div class="mb-3">
@@ -83,12 +83,10 @@
           </div>
           <div class="text-end">
             <button
-              type="button"
+              type="submit"
               class="btn btn-info text-light"
-              @click="sendOrder"
               :disabled="
-                cartData.carts?.length === 0 || Object.keys(errors).length > 0
-              "
+                cartData.carts?.length === 0 || Object.keys(errors).length > 0"
             >
               送出訂單
             </button>
@@ -182,13 +180,13 @@ export default {
       }
     }
   },
+  inject: ['emitter'],
   methods: {
     getCartData () {
       const url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/cart`
       this.$http
         .get(url)
         .then((res) => {
-          console.log(res.data.data)
           // 是個陣列
           this.cartData = res.data.data
         })
@@ -202,7 +200,7 @@ export default {
       this.$http
         .post(url, { data: this.form })
         .then((res) => {
-          console.log(res, 'order?')
+          this.emitter.emit('get-cart-data') // 發出 request 時，購物車會清空，所以同時觸發 emitter 更新
           const { orderId } = res.data
           this.$router.push(`/checkorder/${orderId}`)
         })

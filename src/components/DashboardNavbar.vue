@@ -56,10 +56,14 @@
 
 <script>
 export default {
+  inject: ['emitter'],
   methods: {
     signout () {
       document.cookie = 'karenzToken=; expires=;'
-      alert('已登出')
+      this.emitter.emit('push-message', {
+        style: 'success',
+        title: '已登出後台管理系統'
+      })
       this.$router.push('/login')
     }
   }

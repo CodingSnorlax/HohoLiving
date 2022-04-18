@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <VueLoading :active="isLoading">
+      <img src="@/assets/images/loading-spinner.gif" alt="VueLoadingSpinner" />
+    </VueLoading>
     <div class="text-end mt-4">
       <button
         class="btn btn-secondary text-light my-4"
@@ -54,25 +57,25 @@
     </table>
     <div class="d-flex justify-content-center">
       <!-- 產品分頁元件 -->
-      <dashboard-pagination
+      <DashboardPagination
         :pages="pagination"
         @get-product="getProductData"
-      ></dashboard-pagination>
+      ></DashboardPagination>
     </div>
 
     <!-- 新增、修改商品 modal -->
-    <product-modal
+    <ProductModal
       :tempProductData="tempProductData"
       :isNew="isNew"
       :productModal="productModal"
       @get-product="getProductData"
-    ></product-modal>
+    ></ProductModal>
     <!-- 刪除商品 modal -->
-    <delete-modal
+    <DeleteModal
       :itemData="tempProductData"
       :deleteModal="deleteModal"
       @get-product="getProductData"
-    ></delete-modal>
+    ></DeleteModal>
   </div>
 </template>
 
@@ -80,12 +83,13 @@
 // bootstrap 設定檔
 import BsProductModal from 'bootstrap/js/dist/modal'
 // 自己的元件
-import productModal from '../../components/ProductModal.vue'
-import deleteModal from '../../components/DeleteModal.vue'
-import dashboardPagination from '../../components/DashboardPagination.vue'
+import ProductModal from '@/components/ProductModal.vue'
+import DeleteModal from '@/components/DeleteModal.vue'
+import DashboardPagination from '@/components/DashboardPagination.vue'
 export default {
   data () {
     return {
+      isLoading: false,
       productData: [],
       tempProductData: {
         imagesUrl: []
@@ -97,16 +101,22 @@ export default {
       pagination: {}
     }
   },
+  components: {
+    ProductModal,
+    DeleteModal,
+    DashboardPagination
+  },
   methods: {
     getProductData (page = 1) {
+      this.isLoading = true
       this.$http
         .get(
           `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/admin/products/?page=${page}`
         )
         .then((res) => {
-          console.log(res.data)
           this.productData = res.data.products
           this.pagination = res.data.pagination
+          this.isLoading = false
         })
         .catch((err) => {
           console.log(err)
@@ -129,11 +139,6 @@ export default {
         this.deleteModal.show()
       }
     }
-  },
-  components: {
-    productModal,
-    deleteModal,
-    dashboardPagination
   },
   mounted() {
     this.getProductData()

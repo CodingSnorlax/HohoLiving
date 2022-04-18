@@ -1,5 +1,8 @@
 <template>
   <div class="container d-md-flex">
+    <VueLoading :active="isLoading">
+      <img src="@/assets/images/loading-spinner.gif" alt="VueLoadingSpinner" />
+    </VueLoading>
     <h2 class="text-center text-secondary py-8 d-block d-md-none">好好精選</h2>
     <!-- 產品類別選單 -->
     <div class="row g-2">
@@ -16,7 +19,7 @@
               >
                 全部商品
               </li>
-              <template v-for="item in category" :key="item">
+              <div v-for="item in category" :key="item.id">
                 <li
                   class="d-block fs-5 px-6 mb-3 py-1 text-decoration-none product-category-list-item"
                   :class="{ isSelectedPhone: tempCategory === item }"
@@ -24,7 +27,7 @@
                 >
                   {{ item }}
                 </li>
-              </template>
+              </div>
             </ul>
           </div>
         </nav>
@@ -41,7 +44,7 @@
           >
             全部商品
           </li>
-          <template v-for="item in category" :key="item">
+          <div v-for="item in category" :key="item">
             <li
               class="d-block fs-5 pe-4 ps-2 mb-3 py-1 text-decoration-none product-category-list-item"
               :class="{ isSelected: tempCategory === item }"
@@ -49,13 +52,15 @@
             >
               {{ item }}
             </li>
-          </template>
+          </div>
         </ul>
       </div>
     </div>
     <!-- 主要商品列表區 (卡片) -->
     <div class="row g-md-10">
-      <h2 class="text-center text-secondary py-8 d-none d-md-block">好好精選</h2>
+      <h2 class="text-center text-secondary py-8 d-none d-md-block">
+        好好精選
+      </h2>
       <!-- 卡片 -->
       <div class="col-md-6" v-for="product in products" :key="product.id">
         <div class="card border-0 rounded-3 mb-8 mb-md-12">
@@ -107,22 +112,22 @@
           </div>
         </div>
       </div>
-      <product-pagination
+      <ProductPagination
         class="pt-16 mb-10"
         :pages="pagination"
         @get-product-data="getProductData"
-      ></product-pagination>
+      ></ProductPagination>
     </div>
   </div>
 </template>
 
 <script>
-import ProductPagination from '../../components/ProductPagination.vue'
-import emitter from '@/libs/emitter'
+import ProductPagination from '@/components/ProductPagination.vue'
 
 export default {
   data () {
     return {
+      isLoading: false,
       products: [],
       category: [],
       page: 0,
@@ -133,17 +138,13 @@ export default {
       isLoadingItem: ''
     }
   },
+  inject: ['emitter'],
   components: {
     ProductPagination
   },
-  // 嘗試 router-link 寫法
-  watch: {
-    tempCategory () {
-      this.getProductData((this.page = 1), this.tempCategory)
-    }
-  },
   methods: {
     getProductData (page = 1, query) {
+      this.isLoading = true
       let url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/products?page=${page}`
       if (query) {
         url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/products?category=${query}`
@@ -152,6 +153,7 @@ export default {
         this.tempCategory = ''
       }
       this.$http.get(url).then((res) => {
+        this.isLoading = false
         this.products = res.data.products
         this.pagination = res.data.pagination
       })
@@ -173,6 +175,7 @@ export default {
         })
     },
     addToCart (productId, qty = 1) {
+      this.isLoading = true
       const url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/cart`
       const data = {
         data: {
@@ -184,19 +187,26 @@ export default {
       this.$http
         .post(url, data)
         .then((res) => {
-          console.log(res)
-          emitter.emit('get-cart-data')
+          this.isLoading = false
+          this.emitter.emit('get-cart-data')
+          this.emitter.emit('push-message', {
+            style: 'success',
+            title: `已選購 ${res.data.data.product.title}`
+          })
           this.isLoadingItem = ''
         })
         .catch((err) => {
           console.log(err)
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '商品未選購，請電洽服務人員！'
+          })
         })
     }
   },
   mounted () {
     this.getProductData()
     this.getCategoryData()
-    // this.category = this.$route.query.category
   }
 }
 </script>

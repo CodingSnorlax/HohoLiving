@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <VueLoading :active="isLoading">
+      <img src="@/assets/images/loading-spinner.gif" alt="VueLoadingSpinner" />
+    </VueLoading>
     <div class="row justify-content-center">
       <div class="col-md-8">
         <h2 class="text-center border-bottom text-secondary pt-12 pb-8 mb-8">
@@ -146,6 +149,7 @@
                         class="btn btn-primary text-light"
                         type="button"
                         id="button-addon2"
+                        :disabled="codeStatus"
                         @click="useCode"
                       >
                         套用優惠券
@@ -183,28 +187,30 @@
 </template>
 
 <script>
-import emitter from '@/libs/emitter'
-
 export default {
   data () {
     return {
+      isLoading: false,
       cartData: [],
       productData: [],
       isLoadingItem: '',
       qty: 1,
       // 優惠券
-      code: 'hoholiving2022'
+      code: 'hoholiving2022',
+      codeStatus: false
     }
   },
+  inject: ['emitter'],
   methods: {
     getCartData () {
+      this.isLoading = true
       const url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/cart`
       this.$http
         .get(url)
         .then((res) => {
-          console.log(res.data.data)
           // 是個陣列
           this.cartData = res.data.data
+          this.isLoading = false
         })
         .catch((err) => {
           console.log(err)
@@ -213,6 +219,7 @@ export default {
 
     // 修改購物車數量
     editCartItem (item, qty) {
+      this.isLoading = true
       const url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/cart/${item.id}`
       this.isLoadingItem = item.id
       const userData = {
@@ -225,8 +232,12 @@ export default {
       this.$http
         .put(url, userData)
         .then((res) => {
+          this.isLoading = false
+          this.emitter.emit('push-message', {
+            style: 'success',
+            title: `${res.data.message}`
+          })
           this.isLoadingItem = ''
-          console.log(res)
           this.getCartData()
         })
         .catch((err) => {
@@ -236,36 +247,54 @@ export default {
 
     // 刪除單一購物車產品
     deleteSingleProductItem (id) {
+      this.isLoading = true
       const url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/cart/${id}`
       this.isLoadingItem = id
       this.$http
         .delete(url)
         .then((res) => {
-          emitter.emit('get-cart-data')
-          console.log(res)
+          this.isLoading = false
+          this.emitter.emit('get-cart-data')
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '商品已刪除'
+          })
           this.isLoadingItem = ''
 
           this.getCartData()
         })
         .catch((err) => {
           console.log(err)
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '商品未刪除，相關問題請洽服務人員！'
+          })
         })
     },
 
     useCode () {
+      this.isLoading = true
       const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/coupon`
       const data = {
         code: this.code
       }
-      console.log(data)
       this.$http
         .post(url, { data })
         .then((res) => {
-          console.log(res.data.final_total)
+          this.isLoading = false
+          this.emitter.emit('push-message', {
+            style: 'success',
+            title: '已成功套用優惠券'
+          })
+          this.codeStatus = res.data.success
           this.getCartData()
         })
         .catch((err) => {
           console.log(err)
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '套用優惠券失敗，請電洽服務人員！'
+          })
         })
     },
 

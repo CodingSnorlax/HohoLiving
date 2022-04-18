@@ -109,7 +109,7 @@
                   />
                 </div>
                 <div class="mb-3 col-md-6">
-                  <label for="price" class="form-label">單位</label>
+                  <label for="unit" class="form-label">單位</label>
                   <input
                     id="unit"
                     type="text"
@@ -158,9 +158,9 @@
                 </textarea>
               </div>
               <div class="mb-3">
-                <label for="content" class="form-label">品牌故事</label>
+                <label for="brandStory" class="form-label">品牌故事</label>
                 <textarea
-                  id="description"
+                  id="brandStory"
                   type="text"
                   class="form-control"
                   placeholder="請輸入品牌故事"
@@ -171,7 +171,7 @@
               <div class="mb-3">
                 <label for="content" class="form-label">說明內容</label>
                 <textarea
-                  id="description"
+                  id="content"
                   type="text"
                   class="form-control"
                   placeholder="請輸入說明內容"

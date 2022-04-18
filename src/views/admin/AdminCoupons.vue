@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <Loading :active="isLoading" :z-index="1060"></Loading>
+    <VueLoading :active="isLoading">
+      <img src="@/assets/images/loading-spinner.gif" alt="VueLoadingSpinner" />
+    </VueLoading>
     <div class="text-end mt-4">
       <button
         class="btn btn-secondary text-light my-4"
@@ -48,13 +50,13 @@
         </tr>
       </tbody>
     </table>
-    <coupon-modal
+    <CouponModal
       :coupon="tempCouponData"
       :is-new="isNew"
       ref="couponModal"
       @update-coupon="updateCoupon"
     />
-    <delete-coupon-modal
+    <DeleteCouponModal
       :coupon="tempCouponData"
       ref="deleteModal"
       @delete-coupon="deleteCoupon"
@@ -64,12 +66,13 @@
 
 <script>
 // 引入自己的元件
-import couponModal from '../../components/CouponModal.vue'
-import deleteCouponModal from '../../components/DeleteCouponModal.vue'
+import CouponModal from '@/components/CouponModal.vue'
+import DeleteCouponModal from '@/components/DeleteCouponModal.vue'
 
 export default {
   data () {
     return {
+      isLoading: false,
       // 原始的完整資料
       coupons: [],
       // 複製給 modal 用的資料
@@ -89,17 +92,21 @@ export default {
     }
   },
   components: {
-    couponModal,
-    deleteCouponModal
+    CouponModal,
+    DeleteCouponModal
   },
   methods: {
     getCouponsData () {
+      this.isLoading = true
       this.$http
         .get(
           `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/admin/coupons`
         )
         .then((res) => {
           this.coupons = res.data.coupons
+          setTimeout(() => {
+            this.isLoading = false
+          }, 400)
         })
         .catch((err) => {
           console.log(err)
@@ -127,8 +134,7 @@ export default {
       }
       this.$http[httpMethods](url, { data: item })
         .then((res) => {
-          console.log(res.data)
-          this.coupons = res.data.coupons
+          this.getCouponsData()
           this.$refs.couponModal.hideModal()
         })
         .catch((err) => {
@@ -146,7 +152,6 @@ export default {
           `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/admin/coupon/${item.id}`
         )
         .then((res) => {
-          console.log(res.data)
           this.coupons = res.data.coupons
           this.$refs.deleteModal.hideModal()
           this.getCouponsData()

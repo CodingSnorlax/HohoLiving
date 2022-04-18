@@ -1,6 +1,12 @@
 <template>
   <div class="bg-image">
     <div class="container">
+      <VueLoading :active="isLoading">
+        <img
+          src="@/assets/images/loading-spinner.gif"
+          alt="VueLoadingSpinner"
+        />
+      </VueLoading>
       <div class="title">
         <h2 class="text-light mb-12 mb-md-0 pt-24">好好生活 Hoholiving</h2>
       </div>
@@ -32,10 +38,7 @@
             />
             <ErrorMessage name="密碼" class="invalid-feedback"></ErrorMessage>
           </div>
-          <button type="submit" class="btn btn-primary text-light">
-            <!-- 如果button上面是@click="login" 而不到form上面寫@submit為何不行?-->
-            登入
-          </button>
+          <button type="submit" class="btn btn-primary text-light">登入</button>
           <button
             type="button"
             @click="backToFront"
@@ -53,34 +56,40 @@
 export default {
   data () {
     return {
+      isLoading: false,
       user: {
         username: '',
         password: ''
       }
     }
   },
-  // Email 登入
-  // 存 cookie
-  // 轉址到後台
+  // Email 登入、存 cookie、轉址到後台
+  inject: ['emitter'],
   methods: {
     login () {
+      this.isLoading = true
       this.$http
         .post(`${process.env.VUE_APP_API}/v2/admin/signin`, this.user)
         .then((res) => {
-          console.log(res.data)
+          this.isLoading = false
           const { token, expired } = res.data // 回傳的 token, expired 取值
           document.cookie = `karenzToken=${token}; expires=${new Date(
             expired
           )};` // token, expired 存入 cookie
-          alert(res.data.message)
+          this.emitter.emit('push-message', {
+            style: 'success',
+            title: `${res.data.message}`
+          })
           // 轉址到後台
           this.$router.push('/admin/adminProducts')
         })
         .catch((err) => {
           console.log(err)
-          alert('登入資料有誤，請重新輸入！')
-          this.user.username = ''
-          this.user.password = ''
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '登入資料有誤，請重新輸入！'
+          })
+          this.$refs.form.resetForm() // 欄位清空
         })
     },
     backToFront () {

@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <VueLoading :active="isLoading">
+      <img src="@/assets/images/loading-spinner.gif" alt="VueLoadingSpinner" />
+    </VueLoading>
     <table class="table mt-4">
       <thead>
         <tr>
@@ -38,7 +41,9 @@
                   @change="switchPaidStatus(item)"
                 />
                 <label class="form-check-label">
-                  <span class="text-success" v-if="item.is_paid === true">已付款</span>
+                  <span class="text-success" v-if="item.is_paid === true"
+                    >已付款</span
+                  >
                   <span v-else>未付款</span>
                 </label>
               </div>
@@ -67,23 +72,23 @@
       </tbody>
     </table>
     <!-- 檢視訂單 order modal -->
-    <order-modal
+    <OrderModal
       ref="orderModal"
       :order="tempOrderData"
       :orderModal="OrderModal"
       @get-order-data="getOrderData"
-    ></order-modal>
+    ></OrderModal>
     <!-- 刪除訂單 delete modal  -->
-    <delete-order-modal
+    <DeleteOrderModal
       :itemData="tempOrderData"
       :deleteOrderModal="DeleteOrderModal"
       @get-order-data="getOrderData"
-    ></delete-order-modal>
+    ></DeleteOrderModal>
     <!-- 產品分頁元件 -->
-    <dashboard-pagination
+    <DashboardPagination
       :pages="pagination"
       @get-product="getOrderData"
-    ></dashboard-pagination>
+    ></DashboardPagination>
   </div>
 </template>
 
@@ -91,12 +96,13 @@
 // 引入 modal 元件
 import BsProductModal from 'bootstrap/js/dist/modal'
 // 引入自己的元件
-import DashboardPagination from '../../components/DashboardPagination.vue'
-import OrderModal from '../../components/OrderModal.vue'
-import DeleteOrderModal from '../../components/DeleteOrderModal.vue'
+import DashboardPagination from '@/components/DashboardPagination.vue'
+import OrderModal from '@/components/OrderModal.vue'
+import DeleteOrderModal from '@/components/DeleteOrderModal.vue'
 export default {
   data () {
     return {
+      isLoading: false,
       // 原始的完整資料
       orders: {},
       // 複製給 modal 用的資料
@@ -120,11 +126,13 @@ export default {
     },
     // 取得訂單資料
     getOrderData (currentPage = 1) {
+      this.isLoading = true
       this.$http
         .get(
           `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/admin/orders/?page=${currentPage}`
         )
         .then((res) => {
+          this.isLoading = false
           this.orders = res.data.orders
           this.pagination = res.data.pagination
         })

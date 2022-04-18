@@ -13,7 +13,7 @@
             </li>
             <li class="mb-2">
               <span class="orderTitle">訂單時間</span>
-              <span class="ms-4">{{ orderData.create_at }}</span>
+              <span class="ms-4">{{ $filters.date(orderData.create_at) }}</span>
             </li>
             <li class="mb-2">
               <span class="orderTitle">付款狀態</span>
@@ -120,8 +120,6 @@
 </template>
 
 <script>
-import emitter from '@/libs/emitter'
-
 export default {
   data () {
     return {
@@ -138,7 +136,6 @@ export default {
       this.$http
         .get(url)
         .then((res) => {
-          console.log(res.data.order)
           this.orderData = res.data.order
         })
         .catch((err) => {
@@ -152,8 +149,6 @@ export default {
       this.$http
         .post(url)
         .then((res) => {
-          emitter.emit('get-cart-data')
-          console.log(res.data.success)
           if (res.data.success === true) {
             this.$router.push(`/checkout/${this.orderId}`)
           } else {

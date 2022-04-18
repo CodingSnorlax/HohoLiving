@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DashboardNavbar></DashboardNavbar>
+    <DashboardNavbar />
     <router-view v-if="checkSuccess"></router-view>
   </div>
 </template>
@@ -13,6 +13,7 @@ export default {
       checkSuccess: false
     }
   },
+  inject: ['emitter'],
   components: {
     DashboardNavbar
   },
@@ -28,16 +29,17 @@ export default {
         this.$http
           .post(`${process.env.VUE_APP_API}/v2/api/user/check`)
           .then((res) => {
-            console.log(res.data)
             this.checkSuccess = true
           })
           .catch((err) => {
             console.log(err)
-            alert(err.data.message)
             this.$router.push('/login')
           })
       } else {
-        alert('您尚未登入！')
+        this.emitter.emit('push-message', {
+          style: 'danger',
+          title: '身份驗證錯誤，請重新登入'
+        })
         this.$router.push('/login')
       }
     }

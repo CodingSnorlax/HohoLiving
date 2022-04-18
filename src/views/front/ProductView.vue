@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <VueLoading :active="isLoading">
+      <img src="@/assets/images/loading-spinner.gif" alt="VueLoadingSpinner" />
+    </VueLoading>
     <div class="main pt-8">
       <!-- bread crumb -->
       <nav aria-label="breadcrumb">
@@ -25,12 +28,12 @@
       <!-- bread crumb -->
       <!-- 單一產品主要區域 -->
       <div class="row align-items-center">
-        <!-- 圖片輪播 -->
+        <!-- 商品圖 -->
         <div class="col-md-6">
           <img
             :src="product.imageUrl"
             class="d-block w-100"
-            alt="product.title"
+            :alt="product.title"
           />
         </div>
         <!-- 產品詳細資料 -->
@@ -38,10 +41,10 @@
           <div class="product-content mt-4 mt-md-0">
             <div class="text">
               <!-- 產品標題 -->
-              <span class="badge bg-primary text-light fs-5 mb-4">{{
+              <h2 class="fw-bold mb-4">{{ product.title }}</h2>
+              <span class="badge bg-primary text-light fs-5 mb-6">{{
                 product.category
               }}</span>
-              <h2 class="fw-bold mb-12">{{ product.title }}</h2>
               <!-- 產品介紹 -->
               <div class="mb-12">
                 <p class="fw-light fs-4">{{ product.description }}</p>
@@ -73,7 +76,7 @@
                 <div class="col-6">
                   <!-- 數量按鈕 -->
                   <!-- 把購物車資料與產品資料進行比對 -->
-                  <template v-for="item in cartData.carts" :key="item.id">
+                  <div v-for="item in cartData.carts" :key="item.product_id">
                     <div v-show="product.id === item.product_id">
                       <div
                         v-show="editProductNum"
@@ -114,7 +117,7 @@
                         </div>
                       </div>
                     </div>
-                  </template>
+                  </div>
                 </div>
                 <!-- 數量按鈕 尾 -->
 
@@ -220,7 +223,11 @@
                 <div class="card overflow-hidden">
                   <div class="img-cover rounded-3">
                     <router-link :to="`/product/${item.id}`">
-                      <img :src="item.imageUrl" class="h-100" />
+                      <img
+                        :src="item.imageUrl"
+                        class="h-100"
+                        :alt="item.title"
+                      />
                     </router-link>
                   </div>
 
@@ -245,15 +252,11 @@ import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue.js'
 import { Autoplay } from 'swiper'
 // Import Swiper styles
 import 'swiper/swiper.scss' // core Swiper
-import emitter from '@/libs/emitter'
 
 export default {
-  components: {
-    Swiper,
-    SwiperSlide
-  },
   data () {
     return {
+      isLoading: false,
       product: [],
       category: [],
       isLoadingItem: '',
@@ -266,6 +269,11 @@ export default {
       swiperData: [],
       pageId: this.$route.params.id
     }
+  },
+  inject: ['emitter'],
+  components: {
+    Swiper,
+    SwiperSlide
   },
   watch: {
     // 監聽動態 route
@@ -286,15 +294,17 @@ export default {
       })
     },
     getOneProductData () {
+      this.isLoading = true
       // 取得單一產品 id (route)
       const { id } = this.$route.params
       const url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/product/${id}`
       this.$http.get(url).then((res) => {
-        console.log(res.data.product)
         this.product = res.data.product
+        this.isLoading = false
       })
     },
     addToCart (productId, qty = 1) {
+      this.isLoading = true
       const url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/cart`
       const data = {
         data: {
@@ -306,8 +316,12 @@ export default {
       this.$http
         .post(url, data)
         .then((res) => {
-          emitter.emit('get-cart-data')
-          alert(res.data.message)
+          this.isLoading = false
+          this.emitter.emit('get-cart-data')
+          this.emitter.emit('push-message', {
+            style: 'success',
+            title: `已選購 ${res.data.data.product.title}`
+          })
           if (res.data.success) {
             this.editProductNum = true
             this.getCartData()
@@ -316,6 +330,10 @@ export default {
         })
         .catch((err) => {
           console.log(err)
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '商品未選購，請電洽服務人員！'
+          })
         })
     },
     // 加入購物車之後，就觸發抓 cart 資料，拿到 cart id 就可以改商品數量
@@ -324,16 +342,20 @@ export default {
       this.$http
         .get(url)
         .then((res) => {
-          console.log(res.data.data)
           // 是個陣列
           this.cartData = res.data.data
         })
         .catch((err) => {
           console.log(err)
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '請洽詢服務人員'
+          })
         })
     },
     // 修改購物車數量
     editCartItem (item, qty) {
+      this.isLoading = true
       const url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/cart/${item.id}`
       this.isLoadingItem = item.id
       const userData = {
@@ -346,12 +368,20 @@ export default {
       this.$http
         .put(url, userData)
         .then((res) => {
+          this.isLoading = false
           this.isLoadingItem = ''
-          console.log(res)
+          this.emitter.emit('push-message', {
+            style: 'success',
+            title: `${res.data.message}`
+          })
           this.getCartData()
         })
         .catch((err) => {
           console.log(err)
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '修改錯誤，請洽詢服務人員'
+          })
         })
     }
   },

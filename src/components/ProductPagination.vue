@@ -6,6 +6,7 @@
       <li class="page-item" :class="{ disabled: !pages.has_pre }">
         <a
           class="page-link"
+          href="#"
           aria-label="Previous"
           @click.prevent="$emit('get-product-data', pages.current_page - 1)"
         >
@@ -19,12 +20,13 @@
         :key="'page'+ page"
         :class="{ active: page === pages.current_page }"
       >
-        <a class="page-link" @click.prevent="$emit('get-product-data', page)">{{ page }}</a>
+        <a class="page-link" href="#" @click.prevent="$emit('get-product-data', page)">{{ page }}</a>
       </li>
       <!-- next -->
       <li class="page-item" :class="{ disabled: !pages.has_next }">
         <a
           class="page-link"
+          href="#"
           aria-label="Next"
           @click.prevent="$emit('get-product-data', pages.current_page + 1)"
         >

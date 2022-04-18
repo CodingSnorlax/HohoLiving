@@ -11,7 +11,7 @@
                 <img
                   class="w-100"
                   src="https://images.unsplash.com/photo-1481277542470-605612bd2d61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1106&q=80"
-                  alt=""
+                  alt="404 找不到此頁示意圖"
                 />
               </div>
               <h3 class="text-center mb-6 fs-4">看來目前這邊空蕩蕩的耶...</h3>
@@ -29,7 +29,7 @@
               <img
                 class="w-100"
                 src="https://images.unsplash.com/photo-1481277542470-605612bd2d61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1106&q=80"
-                alt=""
+                alt="404 找不到此頁示意圖"
               />
             </div>
           </div>
