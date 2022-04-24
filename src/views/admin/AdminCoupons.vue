@@ -116,17 +116,11 @@ export default {
     openCouponModal (status, tempCouponObj) {
       this.isNew = status
       if (this.isNew) {
-        console.log('有開到嗎？')
         this.tempCouponData = {
-          due_date: new Date().getTime() / 1000,
-          title: '',
-          is_enabled: 0,
-          percent: 0,
-          code: ''
+          due_date: new Date().getTime() / 1000 // modal 內有，外層沒寫入會報錯!
         }
         this.$refs.couponModal.openModal()
       } else {
-        console.log('沒開道？？')
         this.isNew = false
         this.tempCouponData = { ...tempCouponObj }
         this.$refs.couponModal.openModal()
