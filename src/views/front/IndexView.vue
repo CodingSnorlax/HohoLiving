@@ -1,6 +1,6 @@
 <template>
   <VueLoading :active="isLoading">
-    <img src="@/assets/images/loading-spinner.gif" alt="VueLoadingSpinner">
+    <img src="@/assets/images/loading-spinner.gif" alt="VueLoadingSpinner" />
   </VueLoading>
   <!-- banner -->
   <div class="banner">
@@ -22,8 +22,8 @@
       <h2 class="text-center my-12">限定促銷</h2>
       <div class="product-card-section d-flex">
         <div class="row g-4">
-          <div class="col-md-3" v-for="item in products" :key="item.id">
-            <div class="card mb-3 h-100">
+          <div class="col-md-3 mb-5" v-for="item in products" :key="item.id">
+            <div class="card h-100">
               <div class="imageWrapper">
                 <img
                   :src="item.imageUrl"
@@ -33,7 +33,7 @@
               </div>
 
               <div class="card-body">
-                <h4 class="card-title text-secondary fs-5 fs-md-4 text-center">
+                <h4 class="card-title text-secondary fs-5 fs-md-4 mt-2 text-center">
                   {{ item.title }}
                 </h4>
                 <router-link
@@ -140,136 +140,125 @@
   <div class="customer-credit bg-primary pb-12">
     <div class="container">
       <h2 class="text-center text-white my-12 pt-12">評價好好</h2>
-
-      <!-- 卡片區域 -->
-      <div class="customer-credit-card-section d-md-flex">
+      <div class="row">
         <!-- 第一張卡片 -->
-        <div class="card mb-3 border-0 bg-transparent">
-          <div class="row g-0">
-            <div class="col-3 col-md-12">
-              <div
-                class="d-flex flex-column align-item-center flex-md-row justify-content-md-center"
-              >
-                <img
-                  class="customer-photo rounded-circle border-1 d-block mb-6"
-                  src="https://images.unsplash.com/photo-1532318065232-2ba7c6676cd5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=923&q=80"
-                  alt="customer-photo"
-                />
-              </div>
-            </div>
-            <div class="col-9 col-md-12">
-              <div class="card-body">
-                <h4 class="mb-4 text-center text-light">
-                  購入 ARKELSTORP 實木桌
-                </h4>
-                <h5 class="card-title text-center customer-credit-star">
+        <div class="col-md-4 mb-6">
+          <div class="card border-0 bg-transparent h-100">
+            <div
+              class="card-body bg-secondary mb-6 mb-md-10 dialog-border-bottom d-flex flex-column justify-content-between"
+            >
+              <div class="main-txt mb-4">
+                <h4 class="mb-4 text-light">購入 ARKELSTORP 實木桌</h4>
+                <h5 class="card-title customer-credit-star">
                   商品滿意度 <i class="bi bi-star-fill"></i
                   ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
                   ><i class="bi bi-star-fill"></i>
                 </h5>
-                <p class="card-text text-light text-center">
-                  質感不錯的一個桌子，外觀看起來很好看~<br />
-                  小缺點是抽屜沒有導軌，拖拉沒有那麼順
-                </p>
-                <p
-                  class="card-text d-flex text-center flex-column customer-credit-time"
-                >
-                  <small class="">時間 10 天前</small>
-                  <small class="">評論者 曾先生</small>
-                  <small class="">來自 台北</small>
+                <p class="card-text text-light">
+                  質感不錯的一個桌子，外觀看起來很好看~小缺點是抽屜沒有導軌，拖拉沒有那麼順
                 </p>
               </div>
+
+              <p class="card-text d-flex flex-column customer-credit-time">
+                <small class="">時間 10 天前</small>
+                <small class="">評論者 曾先生</small>
+                <small class="">來自 台北</small>
+              </p>
+            </div>
+
+            <div class="d-flex justify-content-center">
+              <img
+                class="customer-photo rounded-circle border-1 d-block mb-6"
+                src="https://images.unsplash.com/photo-1532318065232-2ba7c6676cd5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=923&q=80"
+                alt="customer-photo"
+              />
             </div>
           </div>
         </div>
-        <!-- 第二張卡片 -->
-        <div class="card mb-3 bg-transparent border-0">
-          <div class="row g-0">
-            <div class="col-3 col-md-12">
-              <div
-                class="d-flex flex-column align-item-center flex-md-row justify-content-md-center"
-              >
-                <img
-                  class="customer-photo rounded-circle border-1 d-block mb-6"
-                  src="https://images.unsplash.com/photo-1479936343636-73cdc5aae0c3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
-                  alt="customer-photo"
-                />
-              </div>
-            </div>
-            <div class="col-9 col-md-12">
-              <div class="card-body">
-                <h4 class="mb-4 text-center text-light">購入 DINERA 馬克杯</h4>
-                <h5 class="card-title text-center customer-credit-star">
+        <!-- second -->
+        <div class="col-md-4 mb-6">
+          <div class="card border-0 bg-transparent h-100">
+            <div
+              class="card-body bg-secondary mb-6 mb-md-10 dialog-border-bottom d-flex flex-column justify-content-between"
+            >
+              <div class="main-txt mb-4">
+                <h4 class="mb-4 text-light">購入 DINERA 馬克杯</h4>
+                <h5 class="card-title customer-credit-star">
                   商品滿意度 <i class="bi bi-star-fill"></i
                   ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
                   ><i class="bi bi-star-fill"></i
                   ><i class="bi bi-star-fill"></i>
                 </h5>
-                <p class="card-text text-light text-center">
+                <p class="card-text text-light">
                   天呀！不敢相信!
-                  <br />這真的就是我從英國回來之後一直在找的馬克杯！<br />謝謝好好生活大老遠從歐洲進口這個杯子，<br />我真的超超超超喜歡的啦～～～！謝謝你們！
-                </p>
-                <p
-                  class="card-text d-flex text-center flex-column customer-credit-time"
-                >
-                  <small class="">時間 6 天前</small>
-                  <small class="">評論者 Yvonne</small>
-                  <small class="">來自 台中</small>
+                  <br />這真的就是我從英國回來之後一直在找的馬克杯！謝謝好好生活大老遠從歐洲進口這個杯子，我真的超超超超喜歡的啦～～～！謝謝你們！
                 </p>
               </div>
+
+              <p class="card-text d-flex flex-column customer-credit-time">
+                <small class="">時間 6 天前</small>
+                <small class="">評論者 Yvonne</small>
+                <small class="">來自 台中</small>
+              </p>
+            </div>
+
+            <div class="d-flex justify-content-center">
+              <img
+                class="customer-photo rounded-circle border-1 d-block mb-6"
+                src="https://images.unsplash.com/photo-1479936343636-73cdc5aae0c3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+                alt="customer-photo"
+              />
             </div>
           </div>
         </div>
-        <!-- 第三張卡片 -->
-        <div class="card mb-3 bg-transparent border-0">
-          <div class="row g-0">
-            <div class="col-3 col-md-12">
-              <div
-                class="d-flex flex-column align-item-center flex-md-row justify-content-md-center"
-              >
-                <img
-                  class="customer-photo rounded-circle border-1 d-block mb-6"
-                  src="https://images.unsplash.com/photo-1584712464768-d91a86e4816f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=935&q=80"
-                  alt="customer-photo"
-                />
-              </div>
-            </div>
-            <div class="col-9 col-md-12">
-              <div class="card-body">
-                <h4 class="mb-4 text-center text-light">購入 OPLEV 門墊</h4>
-                <h5 class="card-title text-center customer-credit-star">
+        <!-- third -->
+        <div class="col-md-4 mb-6">
+          <div class="card border-0 bg-transparent h-100">
+            <div
+              class="card-body bg-secondary mb-6 mb-md-10 dialog-border-bottom d-flex flex-column justify-content-between"
+            >
+              <div class="main-txt mb-4">
+                <h4 class="mb-4 text-light">購入 OPLEV 門墊</h4>
+                <h5 class="card-title customer-credit-star">
                   商品滿意度 <i class="bi bi-star-fill"></i
                   ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
                   ><i class="bi bi-star-fill"></i>
                 </h5>
-                <p class="card-text text-light text-center">
-                  這門墊止滑效果蠻好，<br />我跟我老婆都不擔心洗完澡地板濕滑的問題了勒，<br />這邊也推薦給大家喔
-                </p>
-                <p
-                  class="card-text d-flex text-center flex-column customer-credit-time"
-                >
-                  <small class="">時間 2 天前</small>
-                  <small class="">評論者 吳先生</small>
-                  <small class="">來自 新北</small>
+                <p class="card-text text-light">
+                  這門墊止滑效果蠻好，我跟我老婆都不擔心洗完澡地板濕滑的問題了勒，這邊也推薦給大家喔
                 </p>
               </div>
+
+              <p class="card-text d-flex flex-column customer-credit-time">
+                <small class="">時間 2 天前</small>
+                <small class="">評論者 吳先生</small>
+                <small class="">來自 新北</small>
+              </p>
+            </div>
+
+            <div class="d-flex justify-content-center">
+              <img
+                class="customer-photo rounded-circle border-1 d-block mb-6"
+                src="https://images.unsplash.com/photo-1584712464768-d91a86e4816f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=935&q=80"
+                alt="customer-photo"
+              />
             </div>
           </div>
+          <!-- 第三張卡片結束 -->
         </div>
-        <!-- 第三張 卡片結束 -->
       </div>
     </div>
   </div>
   <!-- 訂閱電子報 -->
   <div class="newsletter">
     <div class="container">
-      <div class="content d-flex flex-column justify-content-center">
+      <div class="content d-flex flex-column justify-content-center ps-4">
+        <h3 class="text-light fs-3 fs-md-2 pt-4 mb-3">
+          訂閱電子報，<br />掌握最新消息與會員專屬優惠！
+        </h3>
         <div class="row">
-          <div class="col-10">
-            <h3 class="text-light fs-3 fs-md-2 ms-4 pt-4 ps-3">
-              訂閱電子報，<br />掌握最新消息與會員專屬優惠！
-            </h3>
-            <div class="input-group mb-3 ms-5">
+          <div class="col-10 col-md-6 col-lg-4">
+            <div class="input-group mb-3">
               <input
                 type="email"
                 class="form-control"
@@ -347,6 +336,45 @@ export default {
 }
 .card-img-top {
   object-fit: cover;
+}
+.dialog-border-bottom {
+  border: 5px solid #888888;
+  margin-bottom: 10px;
+  position: relative;
+}
+.dialog-border-bottom:before {
+  border-color: #888888 transparent transparent;
+  border-style: solid solid solid;
+  border-width: 20px 20px 20px 20px;
+  bottom: -40px;
+  /* 必須指定，才能顯示內容 */
+  content: '';
+
+  height: 0px;
+
+  /* 必須指定，否則會變梯形 */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0px;
+}
+.dialog-border-bottom:after {
+  border-color: #fff transparent transparent;
+  border-style: solid solid solid solid;
+  border-width: 20px;
+
+  /* 必須指定，才能顯示內容 */
+  content: '';
+
+  height: 0px;
+
+  /* 必須指定，否則會變梯形 */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -33px;
+
+  width: 0px;
 }
 .customer-photo {
   width: 120px;

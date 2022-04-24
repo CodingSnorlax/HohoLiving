@@ -99,9 +99,12 @@
                         <!-- 數量 input -->
                         <input
                           type="number"
+                          min="1"
                           class="form-control border-0 text-center my-auto shadow-none bg-light border"
                           aria-describedby="button-addon1"
-                          v-model.lazy="item.qty"
+                          v-model.number="item.qty"
+                          @change="validateNumber(item)"
+                          disabled
                         />
                         <!-- 增加 -->
                         <div class="input-group-append">
@@ -220,23 +223,23 @@
           >
             <template v-if="swiperData.length">
               <swiper-slide v-for="item in swiperData" :key="item.id">
-                <div class="card overflow-hidden">
-                  <div class="img-cover rounded-3">
-                    <router-link :to="`/product/${item.id}`">
+                <router-link :to="`/product/${item.id}`" class="text-decoration-none text-secondary">
+                  <div class="card overflow-hidden">
+                    <div class="img-cover rounded-3">
                       <img
                         :src="item.imageUrl"
                         class="h-100"
                         :alt="item.title"
                       />
-                    </router-link>
-                  </div>
+                    </div>
 
-                  <div class="card-body">
-                    <h5 class="card-title">{{ item.title }}</h5>
-                    <p class="card-text">$ {{ item.price }}</p>
+                    <div class="card-body">
+                      <h5 class="card-title">{{ item.title }}</h5>
+                      <p class="card-text">$ {{ item.price }}</p>
+                    </div>
                   </div>
-                </div></swiper-slide
-              >
+                </router-link>
+              </swiper-slide>
             </template>
           </swiper>
         </div>
@@ -353,17 +356,28 @@ export default {
           })
         })
     },
+    validateNumber (item) {
+      const reg = /^\+?[1-9][0-9]*$/ // 正整數 reg
+      if (!reg.test(item.qty)) {
+        this.getCartData()
+        this.emitter.emit('push-message', {
+          style: 'danger',
+          title: '請輸入 1 以上的整數'
+        })
+      }
+    },
     // 修改購物車數量
-    editCartItem (item, qty) {
-      this.isLoading = true
-      const url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/cart/${item.id}`
-      this.isLoadingItem = item.id
+    editCartItem (item) {
       const userData = {
         data: {
           product_id: item.product_id,
           qty: item.qty
         }
       }
+
+      this.isLoading = true
+      const url = `${process.env.VUE_APP_API}/v2/api/${process.env.VUE_APP_PATH}/cart/${item.id}`
+      this.isLoadingItem = item.id
 
       this.$http
         .put(url, userData)

@@ -20,8 +20,7 @@ export default {
   methods: {
     checkAdmin () {
       const saveToken = document.cookie.replace(
-        // eslint-disable-next-line
-        /(?:(?:^|.*;\s*)karenzToken\s*\=\s*([^;]*).*$)|^.*$/,
+        /(?:(?:^|.*;\s*)karenzToken\s*=\s*([^;]*).*$)|^.*$/,
         '$1'
       )
       if (saveToken) {

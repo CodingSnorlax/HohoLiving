@@ -17,7 +17,9 @@
               >
             </li>
             <li class="pt-3">
-              <router-link class="nav-link pe-2 text-secondary" to="/customerService"
+              <router-link
+                class="nav-link pe-2 text-secondary"
+                to="/customerService"
                 >常見問題</router-link
               >
             </li>
@@ -62,12 +64,13 @@
           aria-controls="navbarNav"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          @click="toggleMenu"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <!-- logo -->
-        <router-link class="nav-link fs-3 text-dark" to="/"
+        <router-link class="nav-link fs-3 text-dark" to="/" @click="isShow = false"
           >好好生活</router-link
         >
         <!-- icon 區域 -->
@@ -76,7 +79,7 @@
             <i class="bi bi-search me-8"></i>
           </a>
           <a href="#"><i class="bi bi-heart-fill fs-4 text-dark me-8"></i></a> -->
-          <router-link to="/cart" class="position-relative"
+          <router-link to="/cart" class="position-relative" @click="isShow = false"
             ><i class="bi bi-cart-fill fs-3 text-dark"></i>
             <!-- 待解決：loading 畫面進來的時候，數字沒有但有紅點 -->
             <span
@@ -93,19 +96,22 @@
         <div
           class="collapse navbar-collapse bg-light custom-header-md-open justify-content-end"
           id="navbarNav"
+          :class="{ 'd-block': isShow }"
         >
           <ul class="navbar-nav me-8 pb-4">
-            <li class="nav-item active">
+            <li class="nav-item active" @click="toggleMenu">
               <router-link class="nav-link pe-2 text-secondary" to="/products"
                 >好好精選</router-link
               >
             </li>
-            <li class="nav-item">
-              <router-link class="nav-link pe-2 text-secondary" to="/customerService"
+            <li class="nav-item" @click="toggleMenu">
+              <router-link
+                class="nav-link pe-2 text-secondary"
+                to="/customerService"
                 >常見問題</router-link
               >
             </li>
-            <li class="nav-item">
+            <li class="nav-item" @click="toggleMenu">
               <router-link class="nav-link pe-2 text-secondary" to="/about"
                 >關於我們</router-link
               >
@@ -121,7 +127,8 @@
 export default {
   data () {
     return {
-      cartData: []
+      cartData: [],
+      isShow: false
     }
   },
   inject: ['emitter'],
@@ -138,6 +145,9 @@ export default {
         .catch((err) => {
           console.dir(err)
         })
+    },
+    toggleMenu () {
+      this.isShow = !this.isShow
     }
   },
   mounted () {

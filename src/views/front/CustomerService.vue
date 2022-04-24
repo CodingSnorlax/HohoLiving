@@ -5,7 +5,7 @@
         <div class="col-md-8">
           <h2 class="py-8 text-center">常見問題</h2>
           <!-- 產品問題 -->
-          <div class="product card px-3 px-md-8 py-8 mb-8">
+          <div class="product card px-3 px-md-8 py-8 mb-16">
             <h3 class="mb-6 bg-primary text-light p-4 text-center fs-4">
               產品問題
             </h3>
@@ -92,7 +92,7 @@
             </div>
           </div>
           <!-- 線上購物 -->
-          <div class="product card px-3 px-md-8  py-8 mb-8">
+          <div class="product card px-3 px-md-8  py-8 mb-16">
             <h3 class="mb-6 bg-primary text-light p-4 text-center fs-4">
               線上購物
             </h3>
@@ -238,7 +238,7 @@
             </div>
           </div>
           <!-- 其他 -->
-          <div class="product card px-3 px-md-8  py-8 mb-8">
+          <div class="product card px-3 px-md-8  py-8 mb-28">
             <h3 class="mb-6 bg-primary text-light p-4 text-center fs-4">
               其他
             </h3>

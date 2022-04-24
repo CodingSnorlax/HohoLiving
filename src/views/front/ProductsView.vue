@@ -21,7 +21,7 @@
               </li>
               <div v-for="item in category" :key="item.id">
                 <li
-                  class="d-block fs-5 px-6 mb-3 py-1 text-decoration-none product-category-list-item"
+                  class="d-block fs-5 px-6 mb-3 py-2 text-decoration-none product-category-list-item"
                   :class="{ isSelectedPhone: tempCategory === item }"
                   @click="getProductData(page, item)"
                 >
@@ -63,54 +63,55 @@
       </h2>
       <!-- 卡片 -->
       <div class="col-md-6" v-for="product in products" :key="product.id">
-        <div class="card border-0 rounded-3 mb-8 mb-md-12">
-          <div class="img-cover rounded-3">
-            <router-link :to="`/product/${product.id}`" class="stretch-link">
+        <router-link :to="`/product/${product.id}`" class="stretch-link text-decoration-none">
+          <div class="card border-0 rounded-3 mb-4">
+            <div class="img-cover rounded-3">
               <img
                 :src="product.imageUrl"
                 class="card-img-top rounded-0 h-100 text-overlay-img rounded-3"
                 :alt="product.title"
               />
-            </router-link>
-            <span class="badge bg-secondary ms-3 mt-3 text-top fs-5">{{
-              product.category
-            }}</span>
-            <!-- 加入購物車 btn -->
-            <button
-              class="position-absolute fixed-bottom btn btn-primary text-light px-6 add-to-cart-btn"
-              :disabled="isLoadingItem === product.id"
-              @click="addToCart(product.id)"
-            >
-              <i class="bi bi-cart-plus fs-5 me-2"></i> 加入購物車
-            </button>
-          </div>
-          <div class="card-body p-0 pt-4">
-            <div
-              class="text d-flex flex-column flex-md-row justify-content-md-between mb-6"
-            >
-              <h3 class="mt-1 fs-5 fw-bold align-item-center px-3">
-                <router-link
-                  :to="`/product/${product.id}`"
-                  class="text-secondary text-decoration-none stretch-link"
-                  >{{ product.title }}</router-link
-                >
-              </h3>
-              <div v-if="product.origin_price === product.price">
-                <p class="card-text mb-0 px-3 fs-5">
-                  $ {{ product.origin_price }}
-                </p>
-              </div>
-              <div v-else>
-                <p class="card-text mb-0 text-danger fs-5 d-flex px-3">
-                  <span class="text-secondary me-4"
-                    ><del>$ {{ product.origin_price }}</del></span
+
+              <span class="badge bg-secondary ms-3 mt-3 text-top fs-5">{{
+                product.category
+              }}</span>
+              <!-- 加入購物車 btn -->
+              <button
+                class="position-absolute fixed-bottom btn btn-primary text-light px-6 add-to-cart-btn"
+                :disabled="isLoadingItem === product.id"
+                @click="addToCart(product.id)"
+              >
+                <i class="bi bi-cart-plus fs-5 me-2"></i> 加入購物車
+              </button>
+            </div>
+            <div class="card-body p-0 pt-4">
+              <div
+                class="text d-flex flex-column flex-md-row justify-content-md-between mb-6"
+              >
+                <h3 class="mt-1 fs-5 fw-bold align-item-center px-3">
+                  <router-link
+                    :to="`/product/${product.id}`"
+                    class="text-secondary text-decoration-none stretch-link"
+                    >{{ product.title }}</router-link
                   >
-                  $ {{ product.price }}
-                </p>
+                </h3>
+                <div v-if="product.origin_price === product.price">
+                  <p class="card-text text-secondary mb-0 px-3 fs-5">
+                    $ {{ product.origin_price }}
+                  </p>
+                </div>
+                <div v-else>
+                  <p class="card-text mb-0 text-danger fs-5 d-flex px-3">
+                    <span class="text-secondary me-4"
+                      ><del>$ {{ product.origin_price }}</del></span
+                    >
+                    $ {{ product.price }}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </router-link>
       </div>
       <ProductPagination
         class="pt-16 mb-10"
@@ -214,7 +215,7 @@ export default {
 <style>
 /* 選單列表手機版 */
 .subNav {
-  height: 3.5rem; /* 隱藏下方捲軸 */
+  height: 4.4rem; /* 隱藏下方捲軸 */
   overflow-y: hidden;
 }
 

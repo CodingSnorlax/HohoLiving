@@ -3,16 +3,12 @@
     <VueLoading :active="isLoading">
       <img src="@/assets/images/loading-spinner.gif" alt="VueLoadingSpinner" />
     </VueLoading>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center text-secondary">
       <div class="col-md-8">
-        <h2 class="text-center border-bottom text-secondary pt-12 pb-8 mb-8">
-          購物車
-        </h2>
+        <h2 class="text-center border-bottom pt-12 pb-8 mb-8">購物車</h2>
         <template v-if="cartData.carts?.length === 0">
           <div class="card bg-light p-28 my-10">
-            <h5 class="text-secondary text-center mb-4 py-4">
-              購物車內尚未添加商品
-            </h5>
+            <h5 class="text-center mb-4 py-4">購物車內尚未添加商品</h5>
 
             <button
               class="btn btn-info fw-light rounded-pill mx-auto w-md-25 px-8 py-1 fs-6"
@@ -45,7 +41,7 @@
                 >
                   <!-- product title & delete btn -->
                   <div class="title d-flex justify-content-between">
-                    <h5 class="card-title text-secondary fs-5 fs-md-4">
+                    <h5 class="card-title fs-5 fs-md-4">
                       {{ item.product.title }}
                     </h5>
                     <button
@@ -53,7 +49,7 @@
                       :disabled="this.isLoadingItem === item.id"
                       @click="deleteSingleProductItem(item.id)"
                     >
-                      <i class="bi bi-x-circle text-secondary fs-4"></i>
+                      <i class="bi bi-x-circle fs-4"></i>
                     </button>
                   </div>
                   <!-- price & product num -->
@@ -82,6 +78,8 @@
                         class="form-control border-0 text-center my-auto shadow-none bg-light border"
                         aria-describedby="button-addon1"
                         v-model.lazy="item.qty"
+                        disabled
+                        @change="validateNumber(item)"
                       />
                       <!-- 增加 -->
                       <div class="input-group-append">
@@ -100,7 +98,7 @@
                     <div>
                       <p class="card-text text-danger fs-4 fs-md-3 d-flex">
                         <span class="text-danger me-4">
-                          $ {{ parseInt(item.final_total) }}
+                          $ {{ parseInt(item.total) }}
                         </span>
                       </p>
                     </div>
@@ -120,7 +118,7 @@
           <div class="col-md-8">
             <div class="card rounded-3 px-6 pb-6 mb-24">
               <div class="card-body">
-                <h3 class="text-secondary pt-4 mb-9">結帳</h3>
+                <h3 class="pt-4 mb-9">結帳</h3>
                 <ul class="list-unstyled mb-12">
                   <li class="d-flex justify-content-between mb-5">
                     總額<span>$ {{ parseInt(cartData.total) }}</span>
@@ -140,8 +138,6 @@
                       <input
                         type="text"
                         class="form-control"
-                        placeholder=""
-                        aria-label=""
                         aria-describedby="button-addon2"
                         v-model="code"
                       />
@@ -161,7 +157,7 @@
                     class="d-flex justify-content-between fw-bold border-top border-bottom py-6"
                   >
                     <span class="fs-6">結帳金額</span>
-                    <span class="fs-4"
+                    <span class="fs-4 text-danger"
                       >$ {{ parseInt(cartData.final_total) }}</span
                     >
                   </li>
@@ -216,7 +212,16 @@ export default {
           console.log(err)
         })
     },
-
+    validateNumber (item) {
+      const reg = /^\+?[1-9][0-9]*$/ // 正整數 reg
+      if (!reg.test(item.qty)) {
+        this.getCartData()
+        this.emitter.emit('push-message', {
+          style: 'danger',
+          title: '請輸入 1 以上的整數'
+        })
+      }
+    },
     // 修改購物車數量
     editCartItem (item, qty) {
       this.isLoading = true
@@ -282,12 +287,19 @@ export default {
         .post(url, { data })
         .then((res) => {
           this.isLoading = false
-          this.emitter.emit('push-message', {
-            style: 'success',
-            title: '已成功套用優惠券'
-          })
-          this.codeStatus = res.data.success
-          this.getCartData()
+          if (res.data.success === false) {
+            this.emitter.emit('push-message', {
+              style: 'danger',
+              title: `${res.data.message}`
+            })
+          } else {
+            this.emitter.emit('push-message', {
+              style: 'success',
+              title: '已成功套用優惠券'
+            })
+            // this.codeStatus = res.data.success
+            this.getCartData()
+          }
         })
         .catch((err) => {
           console.log(err)

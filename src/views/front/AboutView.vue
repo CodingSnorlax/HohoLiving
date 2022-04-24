@@ -4,25 +4,23 @@
       <h2 class="text-secondary text-center my-8 mb-md-24">關於好好生活</h2>
       <div class="row teamIntro mb-12">
         <div class="col-md-6">
-          <div class="teamPhoto py-8 d-none d-md-block">
+          <div class="teamPhoto d-none d-md-block">
             <img
-              class="displayImg"
-              src="https://images.unsplash.com/photo-1634087990020-ef0676240dfa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80"
+              class="object-fit-cover w-100"
+              src="https://images.unsplash.com/photo-1634087990020-ef0676240dfa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80"
               alt="team"
             />
             <img
-              class="originImg"
-              src="https://images.unsplash.com/photo-1634087990011-166f69f67456?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80"
+              class="object-fit-cover w-100"
+              src="https://images.unsplash.com/photo-1634087990011-166f69f67456?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80"
               alt="team"
             />
           </div>
           <!-- 照片 -->
         </div>
         <div class="col-md-6">
-          <div class="teamText bg-primary text-light px-md-8 py-4">
-            <h3
-              class="py-2 text-light mb-6 text-center text-md-start"
-            >
+          <div class="teamText bg-primary text-light px-md-8 py-4 h-100">
+            <h3 class="py-2 text-light mb-6 text-center text-md-start">
               團隊簡介
             </h3>
             <div class="py-2 d-block d-md-none phone-photo-size">
@@ -35,14 +33,14 @@
 
             <div class="team-intro-text ms-6 ms-md-0">
               <p class="mb-4">
-                我們是一群熱愛室內設計的夥伴，也是在 Goldsmith 唸書時的同學。<br />
-                2013 年當我們畢業後，憑藉著一股對室內設計的熱愛，<br />
+                我們是一群熱愛室內設計的夥伴，也是在 Goldsmith 唸書時的同學。
+                2013 年當我們畢業後，憑藉著一股對室內設計的熱愛，
                 決定未來要共同開一家室內設計事務所，自此成為了工作夥伴。<br />
               </p>
               <p class="mb-4">
-                好好生活主要專門販售國內外的設計居家用品，<br />
-                在這裡，你總是可以找到許多特別的小物，<br />
-                以及我們不定時從國外帶回來的精緻生活用品。<br />
+                好好生活主要專門販售國內外的設計居家用品，
+                在這裡，你總是可以找到許多特別的小物，
+                以及我們不定時從國外帶回來的精緻生活用品。
                 若你也和我們一樣熱愛極簡風格的居家設計，記得持續關注我們唷！<br />
               </p>
               <p class="">
@@ -56,7 +54,9 @@
       <div class="row mb-12">
         <div class="col-md-6">
           <div class="text bg-primary px-md-8 py-4">
-            <h3 class="py-2 text-light text-center text-md-start mb-6">創辦人 Jeffery</h3>
+            <h3 class="py-2 text-light text-center text-md-start mb-6">
+              創辦人 Jeffery
+            </h3>
             <div class="d-block d-md-none">
               <img
                 class="w-100 mb-6"
@@ -101,7 +101,9 @@
         </div>
         <div class="col-md-6">
           <div class="text bg-primary px-md-8 py-4 py-md-12">
-            <h3 class="py-2 text-light text-center text-md-start mb-6">創意總監 Regina</h3>
+            <h3 class="py-2 text-light text-center text-md-start mb-6">
+              創意總監 Regina
+            </h3>
             <div class="d-block d-md-none">
               <img
                 class="w-100 mb-6"
@@ -128,7 +130,9 @@
       <div class="row mb-12">
         <div class="col-md-6">
           <div class="text bg-primary px-md-8 py-4 py-md-12">
-            <h3 class="py-2 text-light text-center text-md-start mb-6">財務長 Elly</h3>
+            <h3 class="py-2 text-light text-center text-md-start mb-6">
+              財務長 Elly
+            </h3>
             <div class="d-block d-md-none">
               <img
                 class="w-100 mb-6"
@@ -167,23 +171,19 @@
 <style>
 .teamPhoto {
   position: relative;
-  width: 100%;
+  height: 100%;
 }
 .teamPhoto img {
   position: absolute;
   top: 0;
   left: 0;
   display: block;
-  width: 100%;
+  max-width: 100%;
   /* CSS3淡出淡入效果,1秒 */
   -webkit-transition: opacity 0.35s ease-in-out;
   -moz-transition: opacity 0.35s ease-in-out;
   -o-transition: opacity 0.35s ease-in-out;
   transition: opacity 0.35s ease-in-out;
-}
-
-.displayImg {
-  width: 700px;
 }
 
 .teamIntro img:nth-of-type(2):hover {

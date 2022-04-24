@@ -96,7 +96,7 @@
       </div>
       <!-- 購物清單 -->
       <div class="col-md-6 bg-primary">
-        <div class="card rounded-3 px-2 px-md-6 mx-md-6 mt-8 pb-6 mb-12">
+        <div class="card rounded-3 mx-2 px-2 mt-8 pb-6 mb-12">
           <div class="card-body">
             <h3 class="text-secondary pt-4 mb-9">購物清單</h3>
             <div
@@ -105,14 +105,14 @@
               :key="item.id"
             >
               <div class="row g-0">
-                <div class="col-6 col-md-5">
+                <div class="col-md-5">
                   <img
                     :src="item.product.imageUrl"
-                    class="img-fluid rounded-start w-100 object-fit-cover"
+                    class="img-fluid rounded-start h-100 object-fit-cover"
                     :alt="item.product.title"
                   />
                 </div>
-                <div class="col-6 col-md-7">
+                <div class="col-md-7">
                   <!-- 產品卡片起 -->
                   <div
                     class="card-body d-flex flex-column justify-content-between h-100 pb-2 pb-md-0"
@@ -151,7 +151,7 @@
                 class="d-flex justify-content-between fw-bold border-top border-bottom py-6"
               >
                 <span class="fs-6">總金額</span>
-                <span class="fs-4">$ {{ parseInt(cartData.final_total) }}</span>
+                <span class="fs-4 text-danger">$ {{ parseInt(cartData.final_total) }}</span>
               </li>
             </ul>
           </div>
