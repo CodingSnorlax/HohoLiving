@@ -133,8 +133,6 @@ export default {
         .toISOString()
         .split('T')
       ;[this.due_date] = dateAndTime
-      console.log(this.coupon, 'coupon')
-      console.log(this.tempCouponObj, 'tempObj')
     },
     due_date () {
       this.tempCouponObj.due_date = Math.floor(new Date(this.due_date) / 1000)

@@ -7,7 +7,7 @@
       <button
         class="btn btn-secondary text-light my-4"
         type="button"
-        @click="openCouponModal('isNew')"
+        @click="openCouponModal(true)"
       >
         建立優惠券
       </button>
@@ -35,7 +35,7 @@
             <div class="btn-group">
               <button
                 class="btn btn-outline-primary btn-sm"
-                @click="openCouponModal('edit', item)"
+                @click="openCouponModal(false, item)"
               >
                 編輯
               </button>
@@ -114,11 +114,19 @@ export default {
     },
     // 先判斷是新增還是修改資料，並將 isNew 參數調整，作為後面打 API 使用
     openCouponModal (status, tempCouponObj) {
-      if (status === 'isNew') {
-        this.isNew = true
-        this.tempCouponData = {}
+      this.isNew = status
+      if (this.isNew) {
+        console.log('有開到嗎？')
+        this.tempCouponData = {
+          due_date: new Date().getTime() / 1000,
+          title: '',
+          is_enabled: 0,
+          percent: 0,
+          code: ''
+        }
         this.$refs.couponModal.openModal()
-      } else if (status === 'edit') {
+      } else {
+        console.log('沒開道？？')
         this.isNew = false
         this.tempCouponData = { ...tempCouponObj }
         this.$refs.couponModal.openModal()
