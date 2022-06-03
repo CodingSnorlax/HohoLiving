@@ -320,14 +320,14 @@ export default {
 @media (max-width: 767px) {
   .banner {
     height: calc(100vh - 220px);
-    background-image: url(https://images.unsplash.com/photo-1596079890744-c1a0462d0975?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format);
+    background-image: url(https://images.unsplash.com/photo-1596079890744-c1a0462d0975?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=768);
     background-position: left center;
   }
 }
 @media (min-width: 768px) {
   .banner {
     height: calc(100vh - 208px);
-    background-image: url(https://images.unsplash.com/photo-1616628198591-eaa25811775b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format);
+    background-image: url(https://images.unsplash.com/photo-1616628198591-eaa25811775b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600);
     background-position: bottom;
   }
 }
